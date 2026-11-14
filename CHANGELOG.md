@@ -6,6 +6,16 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-11-14
+
+### Fixed
+
+- Inline the global stylesheet to remove the render-blocking request and shorten
+  the critical path.
+- Add a favicon so browsers no longer log a 404 console error.
+- Enlarge info buttons to a 24px touch target.
+- Include the visible brand text in the home link's accessible name.
+
 ## [0.6.0] - 2026-11-14
 
 ### Added
