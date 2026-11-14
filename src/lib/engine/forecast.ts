@@ -212,11 +212,6 @@ export function computeState({
     const total = Math.floor(lines.reduce((a, l) => a + l.value, 0));
     const sparkAtTier = sparkBonusAt(total, spark);
 
-    const purchases = basket.items.map((x) => ({
-      name: x.prod.name.toUpperCase() + (x.qty > 1 ? " ×" + x.qty : ""),
-      meta: "$" + x.prod.price.toFixed(2) + "/mo",
-    }));
-
     const monthlyNatural = (farmingPulls + loginPulls + greenPulls) / bundle.months;
     const monthlyBasket =
       (bundle.cardPulls + bundle.hhPulls + bundle.opPulls) / bundle.months;
@@ -227,7 +222,6 @@ export function computeState({
       index: i,
       lines,
       total,
-      purchases,
       basket,
       bundle,
       monthlySpend: bundle.recurringSpend,

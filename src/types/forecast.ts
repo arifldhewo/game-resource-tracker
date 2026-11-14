@@ -69,7 +69,6 @@ export interface TierResult {
   index: number;
   lines: BreakdownLine[];
   total: number;
-  purchases: { name: string; meta: string }[];
   basket: Basket;
   bundle: BasketWindow;
   monthlySpend: number;

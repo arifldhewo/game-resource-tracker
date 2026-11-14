@@ -5,6 +5,7 @@ import {
   Fragment,
   useContext,
   useEffect,
+  useId,
   useMemo,
   useState,
 } from "react";
@@ -1055,6 +1056,8 @@ function BreakdownPanel({
   view: ForecastView;
 }) {
   const { t } = useT();
+  const [opPacksOpen, setOpPacksOpen] = useState(false);
+  const opPacksId = useId();
   const tier = view.activeTier;
   const idx = view.tiers.findIndex((x) => x.tier.key === tier.tier.key);
   const prev = idx > 0 ? view.tiers[idx - 1] : null;
@@ -1068,10 +1071,6 @@ function BreakdownPanel({
       }
     });
   }
-
-  const purchase = tier.purchases.length
-    ? tier.purchases.map((p) => p.name).join(" · ")
-    : "no purchases · F2P";
 
   const opPacks = (() => {
     const grouped = new Map<string, { prod: Product; qty: number }>();
@@ -1206,45 +1205,61 @@ function BreakdownPanel({
                     data-op-breakdown
                     className="mb-2 ml-2 flex flex-col gap-1 border-l border-line pl-3"
                   >
-                    <span className="font-mono text-[8.5px] tracking-widest text-muted-2">
-                      OP PACKS · PER MONTH
-                    </span>
-                    {opPacks.map(({ prod, qty }) => (
-                      <div
-                        key={prod.id}
-                        data-op-pack={prod.id}
-                        className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 font-mono text-[10px] leading-normal text-muted-2"
+                    <button
+                      type="button"
+                      aria-expanded={opPacksOpen}
+                      aria-controls={opPacksId}
+                      onClick={() => setOpPacksOpen((open) => !open)}
+                      className="inline-flex min-h-6 items-center gap-1.5 self-start font-mono text-[8.5px] tracking-widest text-muted-2 transition hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    >
+                      <svg
+                        width="8"
+                        height="8"
+                        viewBox="0 0 8 8"
+                        fill="none"
+                        aria-hidden="true"
+                        className={cn(
+                          "size-2 shrink-0 transition-transform",
+                          opPacksOpen && "rotate-90",
+                        )}
                       >
-                        <span className="text-fg">
-                          {prod.id.replace("op", "OP ")}
-                          <b className="ml-1.5 font-medium text-accent">
-                            × {qty}/mo
-                          </b>
-                        </span>
-                        <span>
-                          ${(prod.price * qty).toFixed(2)}/mo ·{" "}
-                          {fmt1(qty * productPulls(prod, state.opPct))} pulls/mo
-                        </span>
-                      </div>
-                    ))}
+                        <path
+                          d="M2.5 1.5 5 4 2.5 6.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      OP PACKS · PER MONTH
+                    </button>
+                    <div
+                      id={opPacksId}
+                      className={opPacksOpen ? "flex flex-col gap-1" : "hidden"}
+                    >
+                      {opPacks.map(({ prod, qty }) => (
+                        <div
+                          key={prod.id}
+                          data-op-pack={prod.id}
+                          className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 font-mono text-[10px] leading-normal text-muted-2"
+                        >
+                          <span className="text-fg">
+                            {prod.id.replace("op", "OP ")}
+                            <b className="ml-1.5 font-medium text-accent">
+                              × {qty}/mo
+                            </b>
+                          </span>
+                          <span>
+                            ${(prod.price * qty).toFixed(2)}/mo ·{" "}
+                            {fmt1(qty * productPulls(prod, state.opPct))} pulls/mo
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </Fragment>
             );
           })}
-        </div>
-
-        <div className="mt-3 flex items-center justify-between gap-3 border-t border-line pt-3">
-          <span className="font-mono text-[8.5px] tracking-[0.06em] text-muted-2">
-            TOTAL PROJECTED · {purchase.toUpperCase()}
-          </span>
-          <span
-            data-bd-total={tier.total}
-            className="font-display text-[28px] font-semibold leading-none"
-          >
-            {fmt(tier.total)}
-            <small className="ml-1 font-mono text-[9.5px] text-muted-2">pulls</small>
-          </span>
         </div>
 
         {state.selected === "LEVIATHAN" && (
