@@ -53,10 +53,11 @@ because they are logic, not content.
 ## Deploy
 
 GitHub Pages via Actions (`.github/workflows/deploy.yml`): pushing a `v*` tag
-(or publishing a GitHub Release with a new tag) installs dependencies, verifies
-the tag matches `package.json`, runs tests, builds the static export, and
-publishes `out/`. Pushes to `master` do not deploy. `public/CNAME` keeps the
-custom domain.
+installs dependencies, verifies the tag matches `package.json`, runs tests,
+builds the static export, and publishes `out/`. Once the deploy succeeds the
+same workflow creates the matching GitHub Release, using the `CHANGELOG.md`
+section for that version as the body. Pushes to `master` do not deploy.
+`public/CNAME` keeps the custom domain.
 
 ### Release
 
@@ -64,6 +65,11 @@ Run `npm run bump -- <patch|minor|major> --note "What changed"`. It updates
 `package.json` and `CHANGELOG.md` and prints the exact commit, tag, and push
 commands. Only the final tag push triggers the deploy; a tag that does not match
 the `package.json` version fails before the build.
+
+The tag does the whole job: deploy, then release. Never create a GitHub Release
+by hand — the workflow would already have done it, and a hand-made release would
+skip the changelog body. `scripts/release-notes.mjs <x.y.z>` prints the body it
+uses.
 
 The previous site is kept in `legacy/` on the migration branch for
 visual/reference parity and is removed at cutover.

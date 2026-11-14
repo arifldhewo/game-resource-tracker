@@ -15,3 +15,10 @@ and validation workflow.
 - Never hardcode hex/rgba colors or raw shadows in components; add a token
   instead.
 - Validate changes with `npm run lint && npm test && npm run build`.
+
+## Release
+
+The tag does everything: `v*` tag push → deploy job → release job, which opens
+the GitHub Release with the `CHANGELOG.md` section as body. Never create a
+release by hand. Ships are: `npm run bump -- patch --note "..."`, commit, push
+`master`, then `git tag -a vX.Y.Z` and push the tag.
