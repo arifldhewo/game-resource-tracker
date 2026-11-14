@@ -15,7 +15,18 @@
   --color-danger: #e5533d;
   --color-amber: #c79a4e;
 
+  --color-line-strong: #3a4249;
+  --color-control: #161a1d;
+  --color-surface-raised: #101315;
+  --color-surface-highlight: #15181b;
+  --color-surface-shade: #0b0d0f;
+
   --radius-prts: 4px;
+
+  --shadow-menu: 0 18px 44px rgba(0, 0, 0, 0.55);
+  --shadow-sheet: 0 30px 80px rgba(0, 0, 0, 0.6);
+  --shadow-toolbar: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-toast: 0 16px 40px rgba(0, 0, 0, 0.5);
 
   --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-rajdhani), "Inter", sans-serif;
@@ -30,7 +41,11 @@
 
   html {
     color-scheme: dark;
-    -webkit-tap-highlight-color: rgba(228, 169, 60, 0.16);
+    -webkit-tap-highlight-color: color-mix(
+      in srgb,
+      var(--color-accent) 16%,
+      transparent
+    );
   }
 
   body {
@@ -63,7 +78,7 @@
   }
 
   ::selection {
-    background: rgba(228, 169, 60, 0.3);
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
   }
 
   @media (min-width: 1024px) {

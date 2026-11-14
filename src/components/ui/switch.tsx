@@ -19,15 +19,15 @@ export function Switch({ checked, onCheckedChange, label }: SwitchProps) {
         "relative h-6 w-11 shrink-0 rounded-full border transition-colors",
         checked
           ? "border-accent/60 bg-accent/20"
-          : "border-line bg-[#161a1d]",
+          : "border-line bg-control",
       )}
     >
       <SwitchPrimitive.Thumb
         className={cn(
           "block size-4 rounded-full transition-transform",
           checked
-            ? "translate-x-[22px] bg-accent"
-            : "translate-x-[3px] bg-muted",
+            ? "translate-x-5.5 bg-accent"
+            : "translate-x-0.75 bg-muted",
         )}
       />
     </SwitchPrimitive.Root>

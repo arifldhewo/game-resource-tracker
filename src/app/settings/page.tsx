@@ -44,7 +44,7 @@ export default function SettingsPage() {
   return (
     <main
       id="main"
-      className="mx-auto max-w-[920px] px-3.5 py-10 min-[760px]:px-[22px] min-[760px]:py-14"
+      className="mx-auto max-w-230 px-3.5 py-10 min-[760px]:px-5.5 min-[760px]:py-14"
     >
       <div className="font-mono text-[10px] tracking-[0.16em] text-accent">
         {t("settings.kicker", "SYSTEM · SETTINGS")}
@@ -52,7 +52,7 @@ export default function SettingsPage() {
       <h1 className="mt-2 mb-3 font-display text-[27px] uppercase leading-none tracking-[0.04em] min-[760px]:text-[34px]">
         {t("settings.title", "SETTINGS")}
       </h1>
-      <p className="m-0 max-w-[680px] text-[15px] leading-[1.65] text-muted">
+      <p className="m-0 max-w-170 text-[15px] leading-[1.65] text-muted">
         {t(
           "settings.lede",
           "Choose which pull-relevant shop packs may compete in the tier basket optimizer. Saved only in this browser.",
@@ -65,7 +65,7 @@ export default function SettingsPage() {
             <h2 className="m-0 font-display text-[17px] uppercase tracking-[0.08em]">
               {t("settings.packs", "PULL VALUE PACKS")}
             </h2>
-            <div className="mt-1 font-mono text-[10px] leading-[1.5] tracking-[0.08em] text-muted-2">
+            <div className="mt-1 font-mono text-[10px] leading-normal tracking-[0.08em] text-muted-2">
               {t(
                 "settings.packsSub",
                 "TOGGLED ITEMS ENTER THE BEST-VALUE CONTEST AT EACH TIER CAP",
@@ -78,7 +78,7 @@ export default function SettingsPage() {
               reset();
               showToast(t("settings.saved", "SETTINGS SAVED · LOCAL"));
             }}
-            className="self-start rounded-prts border border-line bg-card-2 px-3 py-1.5 font-display text-[11px] tracking-[0.1em] text-fg transition hover:border-[#3a4249] min-[600px]:self-auto"
+            className="self-start rounded-prts border border-line bg-card-2 px-3 py-1.5 font-display text-[11px] tracking-widest text-fg transition hover:border-line-strong min-[600px]:self-auto"
           >
             {t("settings.reset", "RESET TO DEFAULTS")}
           </button>
@@ -101,12 +101,12 @@ export default function SettingsPage() {
                     <span className="font-display text-[15px] font-semibold tracking-[0.04em]">
                       {p.name}
                     </span>
-                    <span className="rounded-[2px] border border-line px-1.5 py-0.5 font-mono text-[10px] tracking-[0.1em] text-muted-2">
+                    <span className="rounded-xs border border-line px-1.5 py-0.5 font-mono text-[10px] tracking-widest text-muted-2">
                       {t("settings.category." + p.category, p.category.toUpperCase())}
                     </span>
                     <span
                       className={cn(
-                        "rounded-[2px] border px-1.5 py-0.5 font-mono text-[10px] tracking-[0.1em]",
+                        "rounded-xs border px-1.5 py-0.5 font-mono text-[10px] tracking-widest",
                         core
                           ? "border-accent/50 text-accent"
                           : "border-line text-muted-2",
@@ -117,7 +117,7 @@ export default function SettingsPage() {
                         : t("settings.optional", "OPTIONAL")}
                     </span>
                   </div>
-                  <div className="mt-1 font-mono text-[10px] leading-[1.5] text-muted-2">
+                  <div className="mt-1 font-mono text-[10px] leading-normal text-muted-2">
                     ${p.price.toFixed(2)} · {limitLabel(p, t)} · {p.contents}
                   </div>
                 </div>
@@ -168,7 +168,7 @@ export default function SettingsPage() {
       <div className="mt-6 text-center">
         <a
           href="/forecast"
-          className="font-display text-[12px] tracking-[0.1em] text-muted hover:text-fg"
+          className="font-display text-[12px] tracking-widest text-muted hover:text-fg"
         >
           {t("settings.back", "BACK TO FORECAST")}
         </a>
@@ -178,7 +178,7 @@ export default function SettingsPage() {
         role="status"
         aria-live="polite"
         className={cn(
-          "fixed bottom-6 left-1/2 z-[60] -translate-x-1/2 border border-line border-l-2 border-l-accent bg-card-2 px-4 py-2.5 font-mono text-[10px] tracking-[0.08em] text-fg shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-all",
+          "fixed bottom-6 left-1/2 z-60 -translate-x-1/2 border border-line border-l-2 border-l-accent bg-card-2 px-4 py-2.5 font-mono text-[10px] tracking-[0.08em] text-fg shadow-toast transition-all",
           toast
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-2 opacity-0",

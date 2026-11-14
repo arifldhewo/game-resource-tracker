@@ -105,7 +105,7 @@ export function NumberField({
         className="w-full min-w-0 bg-transparent px-2.5 py-2 text-[14.5px] text-fg outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
       {unit && (
-        <span className="shrink-0 pr-2.5 font-mono text-[9px] tracking-[0.1em] text-muted-2">
+        <span className="shrink-0 pr-2.5 font-mono text-[9px] tracking-widest text-muted-2">
           {unit}
         </span>
       )}

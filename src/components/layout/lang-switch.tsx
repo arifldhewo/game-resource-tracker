@@ -20,7 +20,7 @@ export function LangSwitch() {
           onClick={() => setUiLang(lang)}
           aria-pressed={uiLang === lang}
           className={cn(
-            "min-h-[32px] px-3 font-display uppercase transition-colors",
+            "min-h-8 px-3 font-display uppercase transition-colors",
             uiLang === lang
               ? "bg-accent/10 text-accent"
               : "text-muted hover:text-fg",

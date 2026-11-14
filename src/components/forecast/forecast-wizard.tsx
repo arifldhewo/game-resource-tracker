@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  Fragment,
   useContext,
   useEffect,
   useMemo,
@@ -18,6 +19,7 @@ import { NumberField } from "@/components/ui/number-field";
 import { InfoSheet } from "./info-sheet";
 import { cn } from "@/lib/utils/cn";
 import type { ForecastState, ForecastView, Status, TierResult } from "@/types/forecast";
+import type { Product } from "@/types/product";
 
 const InfoContext = createContext<(key: string) => void>(() => {});
 const useInfo = () => useContext(InfoContext);
@@ -35,7 +37,7 @@ function InfoButton({ k, label }: { k: string; label?: string }) {
       data-info={k}
       aria-label={label ?? "Detail"}
       onClick={() => open(k)}
-      className="inline-flex size-[15px] shrink-0 items-center justify-center text-muted-2 transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="inline-flex size-3.75 shrink-0 items-center justify-center text-muted-2 transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
         <circle cx="6" cy="6" r="5" stroke="currentColor" />
@@ -57,7 +59,7 @@ function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-muted-2"
+      className="flex items-center gap-1.5 font-mono text-[10px] tracking-widest text-muted-2"
     >
       <span className="flex flex-wrap items-center gap-1.5">{children}</span>
       {info && <InfoButton k={info} />}
@@ -101,7 +103,7 @@ function Select({
 }
 
 const STATUS_CLASS: Record<Status, string> = {
-  GUARANTEED: "bg-success text-[#0e1012] border-success",
+  GUARANTEED: "bg-success text-card border-success",
   FEASIBLE: "text-success border-success/25 bg-success/10",
   LIKELY: "text-amber border-amber/30 bg-amber/10",
   DEFICIT: "text-danger border-danger/25 bg-danger/10",
@@ -111,14 +113,14 @@ function StatusBadge({ status }: { status: Status }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-[2px] border px-1.5 py-0.5 font-mono text-[9.5px] tracking-[0.08em] whitespace-nowrap",
+        "inline-flex items-center gap-1.5 rounded-xs border px-1.5 py-0.5 font-mono text-[9.5px] tracking-[0.08em] whitespace-nowrap",
         STATUS_CLASS[status],
       )}
     >
       <span
         className={cn(
           "size-1 rounded-full",
-          status === "GUARANTEED" ? "bg-[#0e1012]" : "bg-current",
+          status === "GUARANTEED" ? "bg-card" : "bg-current",
         )}
       />
       {status}
@@ -209,7 +211,7 @@ export function ForecastWizard() {
 
   if (!store.hydrated || (step >= 3 && !view)) {
     return (
-      <main id="main" className="mx-auto max-w-[1180px] px-3.5 py-10">
+      <main id="main" className="mx-auto max-w-295 px-3.5 py-10">
         <div className="h-40 animate-pulse rounded-prts border border-line bg-card" />
       </main>
     );
@@ -219,7 +221,7 @@ export function ForecastWizard() {
     <InfoContext.Provider value={setInfoKey}>
       <main
         id="main"
-        className="mx-auto max-w-[1180px] px-3.5 pb-4 pt-4 min-[760px]:px-[22px]"
+        className="mx-auto max-w-295 px-3.5 pb-4 pt-4 min-[760px]:px-5.5"
       >
         <h1 className="sr-only">PRTS Forecast</h1>
 
@@ -238,7 +240,7 @@ export function ForecastWizard() {
                   "border px-2 py-2 text-left transition-colors",
                   active
                     ? "border-accent/60 bg-accent/5"
-                    : "border-line bg-card hover:border-[#3a4249]",
+                    : "border-line bg-card hover:border-line-strong",
                 )}
               >
                 <span
@@ -251,7 +253,7 @@ export function ForecastWizard() {
                 </span>
                 <span
                   className={cn(
-                    "font-display text-[12.5px] font-semibold tracking-[0.1em]",
+                    "font-display text-[12.5px] font-semibold tracking-widest",
                     active ? "text-fg" : "text-muted",
                   )}
                 >
@@ -275,12 +277,12 @@ export function ForecastWizard() {
         {step === 3 && view && <StepMatrix state={store} view={view} />}
         {step === 4 && view && <StepOutlook state={store} view={view} />}
 
-        <div className="sticky bottom-3 z-20 mt-6 flex items-center justify-between gap-3 rounded-prts border border-line bg-card/95 px-3 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur">
+        <div className="sticky bottom-3 z-20 mt-6 flex items-center justify-between gap-3 rounded-prts border border-line bg-card/95 px-3 py-2.5 shadow-toolbar backdrop-blur">
           <button
             type="button"
             onClick={() => store.update({ step: step - 1 })}
             className={cn(
-              "rounded-prts border border-line px-3 py-1.5 font-display text-[11px] tracking-[0.1em] text-fg hover:border-[#3a4249]",
+              "rounded-prts border border-line px-3 py-1.5 font-display text-[11px] tracking-widest text-fg hover:border-line-strong",
               step === 1 && "invisible",
             )}
           >
@@ -293,7 +295,7 @@ export function ForecastWizard() {
             type="button"
             onClick={() => store.update({ step: step + 1 })}
             className={cn(
-              "rounded-prts border border-accent bg-accent px-3.5 py-1.5 font-display text-[11px] font-semibold tracking-[0.1em] text-bg hover:brightness-110",
+              "rounded-prts border border-accent bg-accent px-3.5 py-1.5 font-display text-[11px] font-semibold tracking-widest text-bg hover:brightness-110",
               step === 4 && "hidden",
             )}
           >
@@ -331,7 +333,7 @@ function StepTarget({
         kicker="01 · TARGET MISSION"
         title={t("step1.title", "What are you saving for?")}
         right={
-          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-[0.1em] text-muted-2">
+          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-widest text-muted-2">
             {arch.name}
           </span>
         }
@@ -394,7 +396,7 @@ function StepTarget({
                 }}
                 className="w-full bg-transparent px-2.5 py-2 text-[14.5px] text-fg outline-none"
               />
-              <span className="pr-2.5 font-mono text-[9px] tracking-[0.1em] text-muted-2">
+              <span className="pr-2.5 font-mono text-[9px] tracking-widest text-muted-2">
                 END
               </span>
             </div>
@@ -578,7 +580,7 @@ function StepResources({
         kicker="02 · RESOURCES"
         title={t("step2.title", "What do you already hold?")}
         right={
-          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-[0.1em] text-muted-2">
+          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-widest text-muted-2">
             {t("step2.asOfToday", "AS OF TODAY")}
           </span>
         }
@@ -761,7 +763,7 @@ function StepMatrix({
             </span>
             <span
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-[2px] border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.08em]",
+                "inline-flex items-center gap-1.5 rounded-xs border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.08em]",
                 clearCount
                   ? "border-success/25 bg-success/10 text-success"
                   : "border-danger/25 bg-danger/10 text-danger",
@@ -856,22 +858,22 @@ function TierCard({
       onClick={onSelect}
       style={{ borderColor: selected ? row.tier.color : undefined }}
       className={cn(
-        "flex flex-col gap-2 rounded-prts border bg-card p-3 text-left transition-colors hover:border-[#3a4249]",
-        selected ? "bg-accent/[0.03]" : "border-line",
+        "flex flex-col gap-2 rounded-prts border bg-card p-3 text-left transition-colors hover:border-line-strong",
+        selected ? "bg-accent/3" : "border-line",
       )}
     >
       <span className="flex items-center justify-between gap-2">
-        <span className="flex items-center gap-1.5 font-display text-[17px] font-semibold tracking-[0.05em]">
+        <span className="flex items-center gap-1.5 font-display text-[17px] font-semibold tracking-wider">
           {row.tier.key}
           {isStart && (
-            <span className="rounded-[2px] bg-accent px-1 py-0.5 font-mono text-[7.5px] tracking-[0.06em] text-bg">
+            <span className="rounded-xs bg-accent px-1 py-0.5 font-mono text-[7.5px] tracking-[0.06em] text-bg">
               START
             </span>
           )}
         </span>
         <StatusBadge status={row.status} />
       </span>
-      <span className="font-mono text-[9.5px] tracking-[0.05em] text-muted-2">
+      <span className="font-mono text-[9.5px] tracking-wider text-muted-2">
         {row.tier.rule}
       </span>
       <span className="font-mono text-[10.5px] text-muted">
@@ -940,7 +942,7 @@ function StepOutlook({
         kicker="04 · OUTLOOK"
         title={t("step4.title", "Projection & advice")}
         right={
-          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-[0.1em] text-muted-2">
+          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-widest text-muted-2">
             {active.tier.key}
           </span>
         }
@@ -948,7 +950,7 @@ function StepOutlook({
 
       <div className="grid grid-cols-2 gap-2 min-[760px]:grid-cols-3">
         <div className="rounded-prts border border-line bg-card px-3 py-2.5">
-          <div className="font-mono text-[10px] tracking-[0.1em] text-muted-2">
+          <div className="font-mono text-[10px] tracking-widest text-muted-2">
             DAYS LEFT
           </div>
           <div
@@ -962,7 +964,7 @@ function StepOutlook({
           </div>
         </div>
         <div className="rounded-prts border border-line bg-card px-3 py-2.5">
-          <div className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] text-muted-2">
+          <div className="flex items-center gap-1.5 font-mono text-[10px] tracking-widest text-muted-2">
             BENCHMARK <InfoButton k="benchmark" label="Detail benchmark" />
           </div>
           <div
@@ -976,7 +978,7 @@ function StepOutlook({
           </div>
         </div>
         <div className="col-span-2 rounded-prts border border-line bg-card px-3 py-2.5 min-[760px]:col-span-1">
-          <div className="font-mono text-[10px] tracking-[0.1em] text-muted-2">
+          <div className="font-mono text-[10px] tracking-widest text-muted-2">
             MIN VIABLE TIER
           </div>
           <div
@@ -999,7 +1001,7 @@ function StepOutlook({
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[9px] tracking-[0.1em] text-muted-2">
+        <span className="font-mono text-[9px] tracking-widest text-muted-2">
           {t("step4.inspectTier", "INSPECT TIER")}
         </span>
         {view.tiers.map((row) => (
@@ -1071,6 +1073,17 @@ function BreakdownPanel({
     ? tier.purchases.map((p) => p.name).join(" · ")
     : "no purchases · F2P";
 
+  const opPacks = (() => {
+    const grouped = new Map<string, { prod: Product; qty: number }>();
+    tier.basket.items.forEach((item) => {
+      if (item.prod.category !== "op" || item.qty <= 0) return;
+      const entry = grouped.get(item.prod.id);
+      if (entry) entry.qty += item.qty;
+      else grouped.set(item.prod.id, { prod: item.prod, qty: item.qty });
+    });
+    return [...grouped.values()].sort((a, b) => b.prod.price - a.prod.price);
+  })();
+
   const months = view.cal.days > 0 ? Math.max(1, Math.ceil(view.cal.days / 30)) : 1;
   let extraSpend = 0;
   let extraPulls = 0;
@@ -1098,7 +1111,7 @@ function BreakdownPanel({
             </h2>
             <InfoButton k="monthly-total" label="Detail pulls per month vs total" />
           </div>
-          <div className="mt-1 font-mono text-[10px] tracking-[0.05em] text-muted-2">
+          <div className="mt-1 font-mono text-[10px] tracking-wider text-muted-2">
             ${tier.monthlySpend.toFixed(2)}/MO · {fmt1(tier.monthlyPulls)} PULLS/MO ·{" "}
             {state.mode === "pulls"
               ? "BENCHMARK " + fmt(state.targetPulls)
@@ -1123,7 +1136,7 @@ function BreakdownPanel({
       <div className="p-4">
         {prev ? (
           <div className="mb-3 grid grid-cols-2 gap-2 rounded-prts border border-line bg-inset px-3 py-2.5 font-mono text-[10px] text-muted-2 min-[600px]:grid-cols-4">
-            <span className="col-span-2 font-mono text-[9.5px] tracking-[0.1em] min-[600px]:col-span-1">
+            <span className="col-span-2 font-mono text-[9.5px] tracking-widest min-[600px]:col-span-1">
               Δ VS {prev.tier.key}
             </span>
             <span>
@@ -1142,7 +1155,7 @@ function BreakdownPanel({
           </div>
         ) : (
           <div className="mb-3 rounded-prts border border-line bg-inset px-3 py-2.5 font-mono text-[10px] text-muted-2">
-            <span className="mr-2 text-[9.5px] tracking-[0.1em]">BASE TIER</span>
+            <span className="mr-2 text-[9.5px] tracking-widest">BASE TIER</span>
             No previous tier to compare.
           </div>
         )}
@@ -1156,38 +1169,67 @@ function BreakdownPanel({
             const meta =
               line.meta + (line.removed ? " · removed vs previous tier" : "");
             return (
-              <div
-                key={line.key}
-                data-bd-row={line.key}
-                className={cn(
-                  "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-line-soft py-2 last:border-b-0 min-[600px]:grid-cols-[minmax(0,1fr)_120px_60px]",
-                  changed && "bg-accent/[0.03]",
-                  line.removed && "opacity-50",
-                )}
-              >
-                <span className="min-w-0">
-                  <b className="block font-mono text-[11px] font-medium tracking-[0.03em] text-fg">
-                    {line.label}
-                    {changed && (
-                      <i className="ml-1.5 rounded-[2px] border border-accent/30 bg-accent/10 px-1 py-0.5 font-mono text-[8px] not-italic text-accent">
-                        {signed(delta)}
-                      </i>
-                    )}
-                  </b>
-                  <span className="block truncate font-mono text-[10px] text-muted-2">
-                    {meta}
+              <Fragment key={line.key}>
+                <div
+                  data-bd-row={line.key}
+                  className={cn(
+                    "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b border-line-soft py-2 last:border-b-0 min-[600px]:grid-cols-[minmax(0,1fr)_120px_60px]",
+                    changed && "bg-accent/3",
+                    line.removed && "opacity-50",
+                  )}
+                >
+                  <span className="min-w-0">
+                    <b className="block font-mono text-[11px] font-medium tracking-[0.03em] text-fg">
+                      {line.label}
+                      {changed && (
+                        <i className="ml-1.5 rounded-xs border border-accent/30 bg-accent/10 px-1 py-0.5 font-mono text-[8px] not-italic text-accent">
+                          {signed(delta)}
+                        </i>
+                      )}
+                    </b>
+                    <span className="block truncate font-mono text-[10px] text-muted-2">
+                      {meta}
+                    </span>
                   </span>
-                </span>
-                <span className="hidden h-1 overflow-hidden bg-line-soft min-[600px]:block">
-                  <span
-                    className="block h-full"
-                    style={{ width: w + "%", background: tier.tier.color }}
-                  />
-                </span>
-                <span className="text-right font-mono text-[13px] text-fg">
-                  {fmt1(line.value)}
-                </span>
-              </div>
+                  <span className="hidden h-1 overflow-hidden bg-line-soft min-[600px]:block">
+                    <span
+                      className="block h-full"
+                      style={{ width: w + "%", background: tier.tier.color }}
+                    />
+                  </span>
+                  <span className="text-right font-mono text-[13px] text-fg">
+                    {fmt1(line.value)}
+                  </span>
+                </div>
+                {line.key === "op" && opPacks.length > 0 && (
+                  <div
+                    data-op-breakdown
+                    className="mb-2 ml-2 flex flex-col gap-1 border-l border-line pl-3"
+                  >
+                    <span className="font-mono text-[8.5px] tracking-widest text-muted-2">
+                      OP PACKS · PER MONTH
+                    </span>
+                    {opPacks.map(({ prod, qty }) => (
+                      <div
+                        key={prod.id}
+                        data-op-pack={prod.id}
+                        className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 font-mono text-[10px] leading-normal text-muted-2"
+                      >
+                        <span className="text-fg">
+                          {prod.id.replace("op", "OP ")}
+                          <b className="ml-1.5 font-medium text-accent">
+                            × {qty}/mo
+                          </b>
+                        </span>
+                        <span>
+                          ${(prod.price * qty).toFixed(2)}/mo ·{" "}
+                          {fmt1(qty * productPulls(prod, state.opPct))} pulls/mo
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Fragment>
             );
           })}
         </div>
@@ -1208,7 +1250,7 @@ function BreakdownPanel({
         {state.selected === "LEVIATHAN" && (
           <div data-levi-panel className="mt-4 border-t border-line pt-3">
             <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] tracking-[0.06em]">
-              <b className="font-display text-[12px] tracking-[0.05em] text-accent">
+              <b className="font-display text-[12px] tracking-wider text-accent">
                 {t("step4.leviathan", "LEVIATHAN · CUSTOM OP PACKS")}
               </b>
               <span className="flex items-center gap-1.5 text-muted-2">
@@ -1355,12 +1397,12 @@ function PityPanel({
           <h2 className="m-0 font-display text-[19px] uppercase tracking-[0.06em]">
             {t("step4.pity", "Pity estimation")}
           </h2>
-          <div className="mt-1 font-mono text-[10px] tracking-[0.05em] text-muted-2">
+          <div className="mt-1 font-mono text-[10px] tracking-wider text-muted-2">
             {t("step4.pitySub", "DP · EXACT DISTRIBUTION · NO BINOMIAL")}
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="rounded-prts border border-line px-2 py-1 font-mono text-[10px] tracking-[0.05em] text-muted-2">
+          <span className="rounded-prts border border-line px-2 py-1 font-mono text-[10px] tracking-wider text-muted-2">
             EVALUATED @ {tier.tier.key}·{fmt(tier.total)} PULLS
           </span>
           <InfoButton k="pity-grid" label="Detail pity estimation" />

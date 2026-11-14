@@ -20,14 +20,26 @@ function Brand() {
       className="flex items-center gap-2.5 text-fg"
       aria-label="PRTS Forecast home"
     >
-      <span className="grid size-[26px] place-items-center border border-line bg-gradient-to-b from-[#15181b] to-[#0b0d0f]">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <span className="grid size-6.5 place-items-center border border-line bg-linear-to-b from-surface-highlight to-surface-shade">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          aria-hidden="true"
+          className="text-accent"
+        >
           <path
             d="M7 .5 13.5 4v6L7 13.5.5 10V4L7 .5Z"
-            stroke="#E4A93C"
+            stroke="currentColor"
             strokeWidth="1"
           />
-          <path d="M4 9V5l3 2.2L10 5v4" stroke="#EDEEEC" strokeWidth="1" />
+          <path
+            d="M4 9V5l3 2.2L10 5v4"
+            stroke="currentColor"
+            strokeWidth="1"
+            className="text-fg"
+          />
         </svg>
       </span>
       <span className="flex flex-col leading-none">
@@ -77,7 +89,7 @@ export function Topbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-10 flex h-[52px] items-center gap-2.5 border-b border-line bg-bg/95 px-[max(14px,env(safe-area-inset-left))] backdrop-blur-md min-[760px]:gap-3.5 min-[760px]:px-[22px]">
+    <header className="sticky top-0 z-10 flex h-13 items-center gap-2.5 border-b border-line bg-bg/95 px-[max(14px,env(safe-area-inset-left))] backdrop-blur-md min-[760px]:gap-3.5 min-[760px]:px-5.5">
       <Brand />
 
       <nav
@@ -92,7 +104,7 @@ export function Topbar() {
           aria-haspopup="true"
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "flex min-h-11 items-center gap-1.5 border border-line bg-[#101315] px-2.5 font-display text-[11.5px] tracking-[0.1em] text-fg min-[760px]:hidden",
+            "flex min-h-11 items-center gap-1.5 border border-line bg-surface-raised px-2.5 font-display text-[11.5px] tracking-widest text-fg min-[760px]:hidden",
             open && "border-accent/50 text-accent",
           )}
         >
@@ -109,7 +121,7 @@ export function Topbar() {
         <div
           id="navMenu"
           className={cn(
-            "absolute left-0 top-[calc(100%+10px)] z-40 min-w-[180px] max-w-[calc(100vw-28px)] flex-col gap-0 rounded-prts border border-line bg-card p-1.5 shadow-[0_18px_44px_rgba(0,0,0,0.55)]",
+            "absolute left-0 top-[calc(100%+10px)] z-40 min-w-45 max-w-[calc(100vw-28px)] flex-col gap-0 rounded-prts border border-line bg-card p-1.5 shadow-menu",
             open ? "flex" : "hidden",
             "min-[760px]:static min-[760px]:flex min-[760px]:flex-row min-[760px]:gap-0.5 min-[760px]:border-0 min-[760px]:bg-transparent min-[760px]:p-0 min-[760px]:shadow-none",
           )}
@@ -123,10 +135,10 @@ export function Topbar() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex min-h-11 items-center rounded-prts border border-transparent px-2.5 py-2.5 font-display text-[12px] tracking-[0.1em] text-muted transition-colors min-[760px]:min-h-0 min-[760px]:py-[7px] min-[760px]:text-[12.5px]",
+                  "flex min-h-11 items-center rounded-prts border border-transparent px-2.5 py-2.5 font-display text-[12px] tracking-widest text-muted transition-colors min-[760px]:min-h-0 min-[760px]:py-1.75 min-[760px]:text-[12.5px]",
                   active
-                    ? "border-line bg-[#101315] text-accent"
-                    : "hover:bg-[#101315] hover:text-fg",
+                    ? "border-line bg-surface-raised text-accent"
+                    : "hover:bg-surface-raised hover:text-fg",
                 )}
               >
                 {t(link.key, link.label)}

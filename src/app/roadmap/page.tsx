@@ -74,7 +74,7 @@ export default function RoadmapPage() {
   return (
     <main
       id="main"
-      className="mx-auto max-w-[920px] px-3.5 py-10 min-[760px]:px-[22px] min-[760px]:py-14"
+      className="mx-auto max-w-230 px-3.5 py-10 min-[760px]:px-5.5 min-[760px]:py-14"
     >
       <div className="font-mono text-[10px] tracking-[0.16em] text-muted-2">
         ROADMAP · PRODUCT DIRECTION
@@ -82,7 +82,7 @@ export default function RoadmapPage() {
       <h1 className="mt-2 mb-2 font-display text-[24px] font-bold tracking-[0.02em] min-[760px]:text-[30px]">
         Where PRTS Forecast is going
       </h1>
-      <p className="m-0 max-w-[680px] text-[15px] leading-[1.65] text-muted">
+      <p className="m-0 max-w-170 text-[15px] leading-[1.65] text-muted">
         A staged plan. Stage 1 is live. Each later stage reuses the same
         forecast core and only changes how input is collected or where state
         lives.
@@ -92,7 +92,7 @@ export default function RoadmapPage() {
         {STAGES.map((stage) => (
           <article
             key={stage.num}
-            className="rounded-prts border border-line bg-card p-[22px]"
+            className="rounded-prts border border-line bg-card p-5.5"
           >
             <div className="font-mono text-[10px] tracking-[0.14em] text-muted-2">
               {stage.num}
@@ -101,7 +101,7 @@ export default function RoadmapPage() {
               {stage.title}
               <span
                 className={
-                  "rounded-[2px] border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] " +
+                  "rounded-xs border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] " +
                   (stage.tone === "now"
                     ? "border-accent text-accent"
                     : stage.tone === "next"
@@ -129,7 +129,7 @@ export default function RoadmapPage() {
 
       <Link
         href="/"
-        className="mt-6 inline-block font-mono text-[11px] tracking-[0.1em] text-accent hover:underline"
+        className="mt-6 inline-block font-mono text-[11px] tracking-widest text-accent hover:underline"
       >
         ← BACK TO FORECAST
       </Link>

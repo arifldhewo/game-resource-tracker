@@ -40,14 +40,14 @@ const FEATURES = [
 
 export default function LandingPage() {
   return (
-    <main id="main" className="mx-auto max-w-[920px] px-3.5 pt-10 pb-12 min-[760px]:px-[22px] min-[760px]:pt-14 min-[760px]:pb-16">
+    <main id="main" className="mx-auto max-w-230 px-3.5 pt-10 pb-12 min-[760px]:px-5.5 min-[760px]:pt-14 min-[760px]:pb-16">
       <div className="mb-2.5 font-mono text-[10px] tracking-[0.16em] text-muted-2">
         PRTS FORECAST · LANDING
       </div>
       <h1 className="my-5 text-[30px] font-bold leading-[1.55] tracking-normal normal-case">
         Know your <em className="text-accent">pulls</em> before the banner ends.
       </h1>
-      <p className="my-[15px] text-[15px] leading-[1.55] text-muted">
+      <p className="my-3.75 text-[15px] leading-[1.55] text-muted">
         A 4-step calculator for Arknights gacha: project per spending tier
         whether you can reach your target potential and confidence before the
         deadline. Bilingual, state persisted locally, no backend.
@@ -55,13 +55,13 @@ export default function LandingPage() {
       <div className="flex flex-wrap gap-2.5">
         <Link
           href="/forecast"
-          className="inline-flex items-center gap-2 rounded-prts border border-accent bg-accent px-[18px] py-[11px] font-display text-[13px] font-semibold tracking-[0.12em] text-bg transition hover:brightness-110"
+          className="inline-flex items-center gap-2 rounded-prts border border-accent bg-accent px-4.5 py-2.75 font-display text-[13px] font-semibold tracking-[0.12em] text-bg transition hover:brightness-110"
         >
           OPEN FORECAST →
         </Link>
         <Link
           href="/roadmap"
-          className="inline-flex items-center gap-2 rounded-prts border border-line px-[18px] py-[11px] font-display text-[13px] font-semibold tracking-[0.12em] text-fg transition hover:border-accent hover:text-accent"
+          className="inline-flex items-center gap-2 rounded-prts border border-line px-4.5 py-2.75 font-display text-[13px] font-semibold tracking-[0.12em] text-fg transition hover:border-accent hover:text-accent"
         >
           VIEW ROADMAP
         </Link>
@@ -71,14 +71,14 @@ export default function LandingPage() {
         <div className="mb-1.5 font-mono text-[10px] tracking-[0.16em] text-muted-2">
           WHAT IT DOES
         </div>
-        <h2 className="m-0 mb-[18px] font-display text-[26px] font-bold uppercase tracking-[0.04em]">
+        <h2 className="m-0 mb-4.5 font-display text-[26px] font-bold uppercase tracking-[0.04em]">
           Forecast before you spend
         </h2>
         <div className="grid grid-cols-1 gap-3.5 min-[760px]:grid-cols-2">
           {FEATURES.map((f) => (
             <article
               key={f.num}
-              className="relative rounded-prts border border-line bg-card px-[22px] py-5"
+              className="relative rounded-prts border border-line bg-card px-5.5 py-5"
             >
               <div className="mb-2 font-mono text-[10px] tracking-[0.12em] text-muted-2">
                 {f.num}
@@ -91,7 +91,7 @@ export default function LandingPage() {
               </p>
               <span
                 className={
-                  "mt-2.5 inline-block rounded-[2px] border px-[7px] py-0.5 font-mono text-[10px] tracking-[0.12em] " +
+                  "mt-2.5 inline-block rounded-xs border px-1.75 py-0.5 font-mono text-[10px] tracking-[0.12em] " +
                   (f.tone === "now"
                     ? "border-accent text-accent"
                     : f.tone === "next"
