@@ -6,6 +6,13 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.3] - 2026-11-14
+
+### Changed
+
+- Move the GOLDFISH cap to the $30.98 card + HH breakpoint, removing the $0.99
+  cliff and the DOLPHIN dead zone.
+
 ## [0.6.2] - 2026-11-14
 
 ### Changed
