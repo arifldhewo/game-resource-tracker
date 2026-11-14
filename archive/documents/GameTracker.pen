@@ -42747,7 +42747,7 @@
       "name": "Prototype · how to run",
       "width": 420,
       "height": 200,
-      "content": "BLUEPRINT v4.0 PROTOTYPE\n\nSource: proto/forecast.html\nServe it:\n  cd proto && python3 -m http.server 4173\nThen reload browser node \"v4 · Blueprint prototype\".\n\nIf the node is blank, the local server is down."
+      "content": "BLUEPRINT v4.0 PROTOTYPE\n\nSource: archive/proto/forecast.html\nServe it:\n  cd archive/proto && python3 -m http.server 4173\nThen reload browser node \"v4 · Blueprint prototype\".\n\nIf the node is blank, the local server is down."
     },
     {
       "type": "browser",
@@ -42771,7 +42771,7 @@
       "name": "Prototype v3 · how to run",
       "width": 420,
       "height": 220,
-      "content": "FORECAST v3 PROTOTYPE\n\nSource: proto/forecast-v3.html\n\nServe it:\n  cd proto && python3 -m http.server 4173\n\nThen reload browser node\n\"v3 · Spending classification prototype\".\n\nIf the node is blank, the local\nserver is down."
+      "content": "FORECAST v3 PROTOTYPE\n\nSource: archive/proto/forecast-v3.html\n\nServe it:\n  cd archive/proto && python3 -m http.server 4173\n\nThen reload browser node\n\"v3 · Spending classification prototype\".\n\nIf the node is blank, the local\nserver is down."
     }
   ],
   "variables": {

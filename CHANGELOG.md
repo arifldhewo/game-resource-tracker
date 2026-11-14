@@ -1,7 +1,8 @@
 # Changelog
 
-All notable changes to PRTS Forecast are documented here.
-Versions follow semver and deploys run only from `v*` tags or GitHub Releases, not from `master` pushes.
+All notable changes to PRTS Forecast are documented here. Versions follow semver
+and deploys run only from `v*` tags or GitHub Releases, not from `master`
+pushes.
 
 ## [Unreleased]
 
@@ -9,25 +10,32 @@ Versions follow semver and deploys run only from `v*` tags or GitHub Releases, n
 
 ### Changed
 
-- Update GitHub Pages workflow actions to current majors, clearing the Node 20 deprecation warnings.
+- Update GitHub Pages workflow actions to current majors, clearing the Node 20
+  deprecation warnings.
 
 ## [0.5.1] - 2026-11-14
 
 ### Changed
 
-- Debounce forecast number inputs and localStorage writes, and compute the forecast engine only on steps 3-4.
+- Debounce forecast number inputs and localStorage writes, and compute the
+  forecast engine only on steps 3-4.
 
 ## [0.5.0] - 2026-11-14
 
 ### Changed
 
-- Migrate landing, forecast, roadmap, and settings to Next.js 15 (App Router), TypeScript, and Tailwind CSS v4.
+- Migrate landing, forecast, roadmap, and settings to Next.js 15 (App Router),
+  TypeScript, and Tailwind CSS v4.
 - Extract the forecast engine into pure TS modules with Vitest parity tests.
-- Move the product catalog, archetypes, tiers, and EN/ID dictionaries into typed JSON files.
+- Move the product catalog, archetypes, tiers, and EN/ID dictionaries into typed
+  JSON files.
 - Replace the docs mirror deploy with a GitHub Pages Actions workflow.
-- Deploy to Pages only from `v*` tags/releases; `master` pushes no longer trigger a release.
-- Match legacy typography (heading weights, sizes, and mono label usage) after Tailwind preflight.
-- Replace the legacy browser QA script with Vitest unit tests for the catalog and settings defaults.
+- Deploy to Pages only from `v*` tags/releases; `master` pushes no longer
+  trigger a release.
+- Match legacy typography (heading weights, sizes, and mono label usage) after
+  Tailwind preflight.
+- Replace the legacy browser QA script with Vitest unit tests for the catalog
+  and settings defaults.
 - Add `.env.example` and ignore local env files.
 
 ## [0.4.5] - 2026-11-14
@@ -40,7 +48,8 @@ Versions follow semver and deploys run only from `v*` tags or GitHub Releases, n
 
 ### Changed
 
-- Add .gitignore for .commandcode/ and .qa-tmp/; untrack local Command Code artifacts.
+- Add .gitignore for .commandcode/ and .qa-tmp/; untrack local Command Code
+  artifacts.
 
 ## [0.4.3] - 2026-11-14
 
@@ -53,15 +62,18 @@ Versions follow semver and deploys run only from `v*` tags or GitHub Releases, n
 ### Changed
 
 - Add `version.json` as the single source of truth for the app version.
-- Inject the footer version through `src/version.js` and `[data-app-version]`; remove hardcoded version labels.
-- Add `scripts/bump-version.mjs`, `scripts/sync-docs.mjs`, and `scripts/check-version.mjs`.
+- Inject the footer version through `src/version.js` and `[data-app-version]`;
+  remove hardcoded version labels.
+- Add `scripts/bump-version.mjs`, `scripts/sync-docs.mjs`, and
+  `scripts/check-version.mjs`.
 - Add `package.json` scripts for `bump`, `sync`, and `check`.
 
 ## [0.4.1] - 2026-11-14
 
 ### Changed
 
-- Rename Yellow Cert shop terminology from `TIER 0-5` to `PHASE 0-5` in EN and ID.
+- Rename Yellow Cert shop terminology from `TIER 0-5` to `PHASE 0-5` in EN and
+  ID.
 - Update breakdown metadata, certs tooltip, and spec docs to phase terminology.
 - Show `v0.4.1` in the footer of all pages.
 
@@ -81,7 +93,8 @@ Versions follow semver and deploys run only from `v*` tags or GitHub Releases, n
 ### Changed
 
 - Responsive pass verified from 320px through 2560px and landscape.
-- Shared type layer with balanced headings, pretty paragraphs, and tabular numerals.
+- Shared type layer with balanced headings, pretty paragraphs, and tabular
+  numerals.
 - Unify body type at 15px/1.55 and raise small labels to 10px.
 
 ## [0.3.0] - 2026-11-14
@@ -89,13 +102,15 @@ Versions follow semver and deploys run only from `v*` tags or GitHub Releases, n
 ### Added
 
 - Product-level decay for recurring HH packs when Starter HH is selected.
-- Starter Monthly replaces a Monthly Card cycle instead of stacking an extra month.
+- Starter Monthly replaces a Monthly Card cycle instead of stacking an extra
+  month.
 
 ## [0.2.1] - 2026-11-14
 
 ### Fixed
 
-- Cap Monthly Card coverage to the forecast window when Starter Monthly is selected.
+- Cap Monthly Card coverage to the forecast window when Starter Monthly is
+  selected.
 
 ## [0.2.0] - 2026-11-14
 
