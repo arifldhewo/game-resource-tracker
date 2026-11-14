@@ -5,6 +5,12 @@ Versions follow semver and deploys run only from `v*` tags or GitHub Releases, n
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-11-14
+
+### Changed
+
+- Update GitHub Pages workflow actions to current majors, clearing the Node 20 deprecation warnings.
+
 ## [0.5.1] - 2026-11-14
 
 ### Changed
