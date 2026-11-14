@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 
+const COMMIT_DELAY = 250;
+
 interface NumberFieldProps {
   value: number;
   onChange: (value: number) => void;
@@ -28,10 +30,17 @@ export function NumberField({
 }: NumberFieldProps) {
   const [text, setText] = useState(String(value));
   const focused = useRef(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!focused.current) setText(String(value));
   }, [value]);
+
+  useEffect(() => {
+    return () => {
+      if (timer.current) clearTimeout(timer.current);
+    };
+  }, []);
 
   function commit(raw: string, force: boolean) {
     const parsed = parseFloat(raw);
@@ -42,8 +51,24 @@ export function NumberField({
     let next = parsed;
     if (typeof min === "number") next = Math.max(min, next);
     if (typeof max === "number") next = Math.min(max, next);
-    onChange(next);
+    if (next !== value) onChange(next);
     if (force) setText(String(next));
+  }
+
+  function schedule(raw: string) {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      timer.current = null;
+      commit(raw, false);
+    }, COMMIT_DELAY);
+  }
+
+  function flush(raw: string) {
+    if (timer.current) {
+      clearTimeout(timer.current);
+      timer.current = null;
+    }
+    commit(raw, true);
   }
 
   return (
@@ -68,11 +93,14 @@ export function NumberField({
         }}
         onChange={(e) => {
           setText(e.target.value);
-          commit(e.target.value, false);
+          schedule(e.target.value);
         }}
         onBlur={(e) => {
           focused.current = false;
-          commit(e.target.value, true);
+          flush(e.target.value);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") flush(e.currentTarget.value);
         }}
         className="w-full min-w-0 bg-transparent px-2.5 py-2 text-[14.5px] text-fg outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />

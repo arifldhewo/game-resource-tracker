@@ -67,6 +67,30 @@ function persist(state: ForecastState) {
   }
 }
 
+const PERSIST_DELAY = 250;
+let persistTimer: ReturnType<typeof setTimeout> | null = null;
+let pendingState: ForecastState | null = null;
+
+function flushPersist() {
+  if (persistTimer) {
+    clearTimeout(persistTimer);
+    persistTimer = null;
+  }
+  if (!pendingState) return;
+  persist(pendingState);
+  pendingState = null;
+}
+
+function schedulePersist(state: ForecastState) {
+  pendingState = state;
+  if (persistTimer) clearTimeout(persistTimer);
+  persistTimer = setTimeout(flushPersist, PERSIST_DELAY);
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("pagehide", flushPersist);
+}
+
 function snapshot(store: ForecastStore): ForecastState {
   const state = { ...store } as Record<string, unknown>;
   delete state.hydrated;
@@ -95,7 +119,7 @@ export const useForecast = create<ForecastStore>((set, get) => ({
 
   update: (partial) => {
     set(partial);
-    persist(snapshot(get()));
+    schedulePersist(snapshot(get()));
   },
 
   updateLevi: (id, value) => {
@@ -104,6 +128,6 @@ export const useForecast = create<ForecastStore>((set, get) => ({
       [id]: Math.max(0, Math.min(99, Math.round(value))),
     };
     set({ levi });
-    persist(snapshot(get()));
+    schedulePersist(snapshot(get()));
   },
 }));

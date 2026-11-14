@@ -190,8 +190,10 @@ export function ForecastWizard() {
     };
   }, [products]);
 
+  const step = Math.max(1, Math.min(4, store.step || 1));
+
   const view = useMemo<ForecastView | null>(() => {
-    if (!store.hydrated || !store.endDate) return null;
+    if (!store.hydrated || !store.endDate || step < 3) return null;
     try {
       return computeState({
         state: store,
@@ -203,17 +205,15 @@ export function ForecastWizard() {
     } catch {
       return null;
     }
-  }, [store, isEnabled]);
+  }, [store, isEnabled, step]);
 
-  if (!store.hydrated || !view) {
+  if (!store.hydrated || (step >= 3 && !view)) {
     return (
       <main id="main" className="mx-auto max-w-[1180px] px-3.5 py-10">
         <div className="h-40 animate-pulse rounded-prts border border-line bg-card" />
       </main>
     );
   }
-
-  const step = Math.max(1, Math.min(4, store.step || 1));
 
   return (
     <InfoContext.Provider value={setInfoKey}>
@@ -272,8 +272,8 @@ export function ForecastWizard() {
           />
         )}
         {step === 2 && <StepResources state={store} />}
-        {step === 3 && <StepMatrix state={store} view={view} />}
-        {step === 4 && <StepOutlook state={store} view={view} />}
+        {step === 3 && view && <StepMatrix state={store} view={view} />}
+        {step === 4 && view && <StepOutlook state={store} view={view} />}
 
         <div className="sticky bottom-3 z-20 mt-6 flex items-center justify-between gap-3 rounded-prts border border-line bg-card/95 px-3 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur">
           <button
