@@ -6,6 +6,22 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-14
+
+### Added
+
+- Show per-pack OP purchases under OUTLOOK with monthly quantity, spend, and
+  pulls.
+- Add the repo-local Tailwind conventions skill and `AGENTS.md` entry point.
+
+### Changed
+
+- Move colors and shadows to `@theme` tokens; remove hardcoded hex/rgba from
+  components.
+- Canonicalize Tailwind utilities per LSP diagnostics.
+- Reformat all markdown to markdownlint defaults with zero warnings.
+- Archive design docs, prototypes, and the legacy site under `archive/`.
+
 ## [0.5.2] - 2026-11-14
 
 ### Changed
