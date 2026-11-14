@@ -6,6 +6,13 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-11-14
+
+### Changed
+
+- Make the OUTLOOK OP pack breakdown collapsible.
+- Remove the long purchase-list summary from the breakdown footer.
+
 ## [0.6.1] - 2026-11-14
 
 ### Fixed
