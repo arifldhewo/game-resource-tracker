@@ -37,7 +37,7 @@ function InfoButton({ k, label }: { k: string; label?: string }) {
       data-info={k}
       aria-label={label ?? "Detail"}
       onClick={() => open(k)}
-      className="inline-flex size-3.75 shrink-0 items-center justify-center text-muted-2 transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="inline-flex size-6 shrink-0 items-center justify-center text-muted-2 transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
         <circle cx="6" cy="6" r="5" stroke="currentColor" />

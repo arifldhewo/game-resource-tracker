@@ -18,7 +18,7 @@ function Brand() {
     <Link
       href="/"
       className="flex items-center gap-2.5 text-fg"
-      aria-label="PRTS Forecast home"
+      aria-label="PRTS Forecast Terminal home"
     >
       <span className="grid size-6.5 place-items-center border border-line bg-linear-to-b from-surface-highlight to-surface-shade">
         <svg
