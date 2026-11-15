@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ForecastWizard } from "@/components/forecast/forecast-wizard";
+import { ForecastWizard } from "@/app/forecast/components/forecast-wizard";
 
 export const metadata: Metadata = {
   title: "Forecast",

@@ -15,12 +15,13 @@ src/
 ├─ app/
 │  ├─ layout.tsx      shell: Topbar + Footer + StoreHydrator
 │  ├─ page.tsx        landing (server)
-│  ├─ forecast/page.tsx   server
+│  ├─ forecast/
+│  │  ├─ page.tsx     server
+│  │  └─ components/  forecast-wizard, info-sheet
 │  ├─ roadmap/page.tsx    server
 │  └─ settings/page.tsx   client
 ├─ components/
 │  ├─ layout/         footer, lang-switch, store-hydrator, topbar
-│  ├─ forecast/       forecast-wizard (1506 lines), info-sheet
 │  └─ ui/             number-field, switch
 └─ lib/               engine, store, i18n, data
 ```
@@ -31,10 +32,10 @@ Consumers today:
 | --- | --- | --- |
 | `layout/topbar`, `footer`, `store-hydrator` | `app/layout.tsx` | all |
 | `layout/lang-switch` | `topbar` | all |
-| `forecast/forecast-wizard` | `app/forecast/page.tsx` | 1 |
-| `forecast/info-sheet` | `forecast-wizard` | 1 |
-| `ui/number-field` | `forecast-wizard` | 1 |
+| `ui/number-field` | `forecast/components/forecast-wizard` | 1 |
 | `ui/switch` | `app/settings/page.tsx` | 1 |
+| `forecast/components/forecast-wizard` | `app/forecast/page.tsx` | 1 |
+| `forecast/components/info-sheet` | `forecast-wizard` | 1 |
 
 ## Rules
 
@@ -51,9 +52,8 @@ Two folders are exempt because they are shared by construction:
   component starts importing tiers, products, or the engine, it is no longer
   a primitive and moves.
 
-`forecast-wizard` and `info-sheet` are the current violations of rule 1: both
-serve only `/forecast`. They migrate to `app/forecast/components/` on the next
-touch of that route, not as a standalone refactor.
+Nothing violates rule 1 today. `forecast-wizard` and `info-sheet` were the
+last offenders and moved to `app/forecast/components/`; keep it that way.
 
 ### 2. Single-page components live next to their page
 
@@ -80,9 +80,14 @@ folder — those names are routing conventions and would create a route.
 
 ### 4. Dependencies point one way
 
-`app → components → lib`. A component never imports from `src/app`, and
-`src/lib` never imports a component. Business logic (basket optimization, pity
-math, tier rules) stays in `src/lib/engine`; components only render it.
+`app → components → lib`. Code in `src/components` never imports from
+`src/app`, and `src/lib` never imports a component. Business logic (basket
+optimization, pity math, tier rules) stays in `src/lib/engine`; components
+only render it.
+
+The one allowed exception is inward-only: a file in `app/<route>/components/`
+may import from its own route folder, since it is part of that route. It still
+must not reach into a different route.
 
 ### 5. No barrel files
 
