@@ -17,7 +17,8 @@ src/
 │  ├─ page.tsx        landing (server)
 │  ├─ forecast/
 │  │  ├─ page.tsx     server
-│  │  └─ components/  forecast-wizard, info-sheet
+│  │  └─ components/  wizard, info, form-fields, section, display,
+│  │                  status-badge, info-sheet
 │  ├─ roadmap/page.tsx    server
 │  └─ settings/page.tsx   client
 ├─ components/
@@ -97,9 +98,10 @@ bundler.
 
 ### 6. Split by responsibility, not by line count
 
-`forecast-wizard.tsx` is 1506 lines and is the repo's known outlier. When
-touching it, extract a section into `app/forecast/components/` if that section
-is self-contained. Do not split purely to reduce the number of lines.
+`forecast-wizard.tsx` is still large and is the repo's known outlier. Its
+form, layout, and display atoms already live in sibling files; the step
+sections remain. When touching it, extract a section only if it is
+self-contained. Do not split purely to reduce the number of lines.
 
 ## Validate
 

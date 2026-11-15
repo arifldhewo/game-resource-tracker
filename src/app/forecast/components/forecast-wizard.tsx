@@ -1,184 +1,28 @@
 "use client";
 
-import {
-  createContext,
-  Fragment,
-  useContext,
-  useEffect,
-  useId,
-  useMemo,
-  useState,
-} from "react";
+import { Fragment, useEffect, useId, useMemo, useState } from "react";
 import { ARCHETYPES, ARCHETYPE_KEYS, PRODUCTS, TIERS } from "@/lib/data";
 import { computeState } from "@/lib/engine/forecast";
-import { dmyToISO, fmt, fmt1, isoToDMY, pct } from "@/lib/engine/format";
+import { dmyToISO, fmt, fmt1, isoToDMY, pct, signed, signedUsd } from "@/lib/engine/format";
 import { productPulls } from "@/lib/engine/basket";
+import { groupOpPacks, leviExtras, mergeBreakdownLines } from "@/lib/engine/breakdown";
 import { useForecast } from "@/lib/store/forecast-store";
 import { useSettings } from "@/lib/store/settings-store";
 import { useT } from "@/lib/i18n/use-t";
 import { NumberField } from "@/components/ui/number-field";
-import { InfoSheet } from "./info-sheet";
+import { InfoButton, InfoProvider } from "./info";
+import { Field, Label, Segmented, Select } from "./form-fields";
+import { MiniCard, PaneHead } from "./section";
+import { MetaChip, Meter, StatTile } from "./display";
+import { StatusBadge } from "./status-badge";
 import { cn } from "@/lib/utils/cn";
-import type { ForecastState, ForecastView, Status, TierResult } from "@/types/forecast";
-import type { Product } from "@/types/product";
-
-const InfoContext = createContext<(key: string) => void>(() => {});
-const useInfo = () => useContext(InfoContext);
+import type { ForecastState, ForecastView, TierResult } from "@/types/forecast";
 
 const STEP_NAMES = ["TARGET", "RESOURCES", "MATRIX", "OUTLOOK"];
-
-const CONTROL =
-  "w-full rounded-prts border border-line bg-inset px-2.5 py-2 text-[14px] text-fg outline-none focus:border-accent/60";
-
-function InfoButton({ k, label }: { k: string; label?: string }) {
-  const open = useInfo();
-  return (
-    <button
-      type="button"
-      data-info={k}
-      aria-label={label ?? "Detail"}
-      onClick={() => open(k)}
-      className="inline-flex size-6 shrink-0 items-center justify-center text-muted-2 transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-        <circle cx="6" cy="6" r="5" stroke="currentColor" />
-        <path d="M6 5v4M6 3v.6" stroke="currentColor" strokeLinecap="round" />
-      </svg>
-    </button>
-  );
-}
-
-function Label({
-  children,
-  info,
-  htmlFor,
-}: {
-  children: React.ReactNode;
-  info?: string;
-  htmlFor?: string;
-}) {
-  return (
-    <label
-      htmlFor={htmlFor}
-      className="flex items-center gap-1.5 font-mono text-[10px] tracking-widest text-muted-2"
-    >
-      <span className="flex flex-wrap items-center gap-1.5">{children}</span>
-      {info && <InfoButton k={info} />}
-    </label>
-  );
-}
-
-function Field({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={cn("flex flex-col gap-1.5", className)}>{children}</div>;
-}
-
-function Select({
-  value,
-  onChange,
-  children,
-  id,
-  className,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-}) {
-  return (
-    <select
-      id={id}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className={cn(CONTROL, "appearance-none", className)}
-    >
-      {children}
-    </select>
-  );
-}
-
-const STATUS_CLASS: Record<Status, string> = {
-  GUARANTEED: "bg-success text-card border-success",
-  FEASIBLE: "text-success border-success/25 bg-success/10",
-  LIKELY: "text-amber border-amber/30 bg-amber/10",
-  DEFICIT: "text-danger border-danger/25 bg-danger/10",
-};
-
-function StatusBadge({ status }: { status: Status }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-xs border px-1.5 py-0.5 font-mono text-[9.5px] tracking-[0.08em] whitespace-nowrap",
-        STATUS_CLASS[status],
-      )}
-    >
-      <span
-        className={cn(
-          "size-1 rounded-full",
-          status === "GUARANTEED" ? "bg-card" : "bg-current",
-        )}
-      />
-      {status}
-    </span>
-  );
-}
-
-function PaneHead({
-  kicker,
-  title,
-  right,
-}: {
-  kicker: string;
-  title: string;
-  right?: React.ReactNode;
-}) {
-  return (
-    <div className="mb-3 flex flex-col gap-2 min-[600px]:flex-row min-[600px]:items-end min-[600px]:justify-between">
-      <div>
-        <div className="font-mono text-[9.5px] tracking-[0.14em] text-accent">
-          {kicker}
-        </div>
-        <h2 className="m-0 font-display text-[23px] uppercase leading-[1.05] tracking-[0.03em] min-[760px]:text-[26px]">
-          {title}
-        </h2>
-      </div>
-      {right}
-    </div>
-  );
-}
-
-function MiniCard({
-  title,
-  right,
-  children,
-}: {
-  title: string;
-  right?: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="rounded-prts border border-line bg-card">
-      <div className="flex items-center justify-between gap-2 border-b border-line px-4 py-2.5">
-        <h3 className="m-0 font-display text-[14px] uppercase tracking-[0.06em]">
-          {title}
-        </h3>
-        {right}
-      </div>
-      <div className="p-4">{children}</div>
-    </section>
-  );
-}
 
 export function ForecastWizard() {
   const store = useForecast();
   const products = useSettings((s) => s.products);
-  const [infoKey, setInfoKey] = useState<string | null>(null);
   const [endText, setEndText] = useState("");
   const [dateHint, setDateHint] = useState("");
 
@@ -219,7 +63,7 @@ export function ForecastWizard() {
   }
 
   return (
-    <InfoContext.Provider value={setInfoKey}>
+    <InfoProvider>
       <main
         id="main"
         className="mx-auto max-w-295 px-3.5 pb-4 pt-4 min-[760px]:px-5.5"
@@ -303,10 +147,8 @@ export function ForecastWizard() {
             {step === 3 ? "OPEN OUTLOOK" : "CONTINUE"}
           </button>
         </div>
-
-        <InfoSheet infoKey={infoKey} onClose={() => setInfoKey(null)} />
       </main>
-    </InfoContext.Provider>
+    </InfoProvider>
   );
 }
 
@@ -333,11 +175,7 @@ function StepTarget({
       <PaneHead
         kicker="01 · TARGET MISSION"
         title={t("step1.title", "What are you saving for?")}
-        right={
-          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-widest text-muted-2">
-            {arch.name}
-          </span>
-        }
+        right={<MetaChip>{arch.name}</MetaChip>}
       />
 
       <MiniCard title={t("step1.bannerGoal", "Banner & goal")}>
@@ -408,29 +246,19 @@ function StepTarget({
 
           <Field>
             <Label info="mode">{t("step1.mode", "TARGET MODE")}</Label>
-            <div className="grid grid-cols-2 gap-1">
-              {(
-                [
-                  ["pulls", t("step1.modePulls", "TARGET PULLS")],
-                  ["potential", t("step1.modePotential", "TARGET POTENTIAL")],
-                ] as const
-              ).map(([mode, label]) => (
-                <button
-                  key={mode}
-                  type="button"
-                  aria-pressed={state.mode === mode}
-                  onClick={() => state.update({ mode })}
-                  className={cn(
-                    "rounded-prts border px-2 py-2 font-display text-[11px] tracking-[0.08em]",
-                    state.mode === mode
-                      ? "border-accent/50 bg-accent/10 text-accent"
-                      : "border-line bg-card-2 text-muted hover:text-fg",
-                  )}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+            <Segmented
+              label={t("step1.mode", "TARGET MODE")}
+              columns={2}
+              value={state.mode}
+              onChange={(mode) => state.update({ mode })}
+              options={[
+                { value: "pulls", label: t("step1.modePulls", "TARGET PULLS") },
+                {
+                  value: "potential",
+                  label: t("step1.modePotential", "TARGET POTENTIAL"),
+                },
+              ]}
+            />
           </Field>
 
           {state.mode === "pulls" ? (
@@ -538,24 +366,17 @@ function StepTarget({
                 <Label info="confidence">
                   {t("step1.confidence", "CONFIDENCE TARGET")}
                 </Label>
-                <div className="grid grid-cols-4 gap-1">
-                  {[0.5, 0.8, 0.9, 0.95].map((conf) => (
-                    <button
-                      key={conf}
-                      type="button"
-                      aria-pressed={state.confidence === conf}
-                      onClick={() => state.update({ confidence: conf })}
-                      className={cn(
-                        "rounded-prts border px-2 py-2 font-mono text-[10px] tracking-[0.06em]",
-                        state.confidence === conf
-                          ? "border-accent/50 bg-accent/10 text-accent"
-                          : "border-line bg-inset text-muted hover:text-fg",
-                      )}
-                    >
-                      {Math.round(conf * 100)}%
-                    </button>
-                  ))}
-                </div>
+                <Segmented
+                  label={t("step1.confidence", "CONFIDENCE TARGET")}
+                  columns={4}
+                  variant="mono"
+                  value={state.confidence}
+                  onChange={(confidence) => state.update({ confidence })}
+                  options={[0.5, 0.8, 0.9, 0.95].map((conf) => ({
+                    value: conf,
+                    label: Math.round(conf * 100) + "%",
+                  }))}
+                />
               </Field>
             </div>
           )}
@@ -580,11 +401,7 @@ function StepResources({
       <PaneHead
         kicker="02 · RESOURCES"
         title={t("step2.title", "What do you already hold?")}
-        right={
-          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-widest text-muted-2">
-            {t("step2.asOfToday", "AS OF TODAY")}
-          </span>
-        }
+        right={<MetaChip>{t("step2.asOfToday", "AS OF TODAY")}</MetaChip>}
       />
 
       <div className="flex flex-col gap-3">
@@ -883,16 +700,7 @@ function TierCard({
         </b>{" "}
         · {fmt1(row.monthlyPulls)} pulls/mo
       </span>
-      <span className="relative block h-1 overflow-hidden bg-line-soft">
-        <span
-          className="absolute inset-y-0 left-0"
-          style={{ width: fill + "%", background: row.tier.color }}
-        />
-        <span
-          className="absolute inset-y-0 w-px bg-fg/60"
-          style={{ left: tick + "%" }}
-        />
-      </span>
+      <Meter value={fill} color={row.tier.color} tick={tick} />
       <span className="truncate font-mono text-[9.5px] text-muted-2">
         {basketLabel}
       </span>
@@ -942,63 +750,43 @@ function StepOutlook({
       <PaneHead
         kicker="04 · OUTLOOK"
         title={t("step4.title", "Projection & advice")}
-        right={
-          <span className="w-fit rounded-prts border border-line bg-card px-2 py-1 font-mono text-[9.5px] tracking-widest text-muted-2">
-            {active.tier.key}
-          </span>
-        }
+        right={<MetaChip>{active.tier.key}</MetaChip>}
       />
 
       <div className="grid grid-cols-2 gap-2 min-[760px]:grid-cols-3">
-        <div className="rounded-prts border border-line bg-card px-3 py-2.5">
-          <div className="font-mono text-[10px] tracking-widest text-muted-2">
-            DAYS LEFT
-          </div>
-          <div
-            data-stat="days"
-            className="font-display text-[26px] font-semibold leading-none"
-          >
-            {fmt(view.cal.days)}
-          </div>
-          <div className="mt-1 font-mono text-[10px] text-muted-2">
-            {fmt(view.cal.weeks)} weekly resets
-          </div>
-        </div>
-        <div className="rounded-prts border border-line bg-card px-3 py-2.5">
-          <div className="flex items-center gap-1.5 font-mono text-[10px] tracking-widest text-muted-2">
-            BENCHMARK <InfoButton k="benchmark" label="Detail benchmark" />
-          </div>
-          <div
-            data-stat="benchmark"
-            className="font-display text-[26px] font-semibold leading-none"
-          >
-            {fmt(view.benchmark)}
-          </div>
-          <div className="mt-1 font-mono text-[10px] text-muted-2">
-            {state.mode === "pulls" ? "target pulls" : "pulls @ confidence"}
-          </div>
-        </div>
-        <div className="col-span-2 rounded-prts border border-line bg-card px-3 py-2.5 min-[760px]:col-span-1">
-          <div className="font-mono text-[10px] tracking-widest text-muted-2">
-            MIN VIABLE TIER
-          </div>
-          <div
-            data-stat="mintier"
-            className="font-display text-[26px] font-semibold leading-none text-accent"
-          >
-            {minTier ? minTier.tier.key : "NONE"}
-          </div>
-          <div className="mt-1 font-mono text-[10px] text-muted-2">
-            {minTier
+        <StatTile
+          label="DAYS LEFT"
+          dataStat="days"
+          value={fmt(view.cal.days)}
+          sub={<>{fmt(view.cal.weeks)} weekly resets</>}
+        />
+        <StatTile
+          label={
+            <>
+              BENCHMARK <InfoButton k="benchmark" label="Detail benchmark" />
+            </>
+          }
+          dataStat="benchmark"
+          value={fmt(view.benchmark)}
+          sub={state.mode === "pulls" ? "target pulls" : "pulls @ confidence"}
+        />
+        <StatTile
+          className="col-span-2 min-[760px]:col-span-1"
+          label="MIN VIABLE TIER"
+          dataStat="mintier"
+          tone="text-accent"
+          value={minTier ? minTier.tier.key : "NONE"}
+          sub={
+            minTier
               ? state.mode === "pulls"
                 ? fmt(minTier.total) + " pulls"
                 : pct(minTier.prob) +
                   " at " +
                   Math.round(state.confidence * 100) +
                   "% conf"
-              : "no tier clears"}
-          </div>
-        </div>
+              : "no tier clears"
+          }
+        />
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -1038,16 +826,6 @@ function StepOutlook({
   );
 }
 
-function signed(n: number): string {
-  if (Math.abs(n) < 0.05) return "0";
-  return (n > 0 ? "+" : "−") + fmt1(Math.abs(n));
-}
-
-function signedUsd(n: number): string {
-  if (Math.abs(n) < 0.005) return "$0.00";
-  return (n > 0 ? "+" : "−") + "$" + Math.abs(n).toFixed(2);
-}
-
 function BreakdownPanel({
   state,
   view,
@@ -1063,39 +841,15 @@ function BreakdownPanel({
   const prev = idx > 0 ? view.tiers[idx - 1] : null;
   const prevByKey = new Map((prev?.lines ?? []).map((l) => [l.key, l]));
 
-  const merged = tier.lines.map((l) => ({ ...l }));
-  if (prev) {
-    prev.lines.forEach((l) => {
-      if (!merged.some((x) => x.key === l.key)) {
-        merged.push({ ...l, value: 0, removed: true });
-      }
-    });
-  }
+  const merged = mergeBreakdownLines(tier, prev);
 
-  const opPacks = (() => {
-    const grouped = new Map<string, { prod: Product; qty: number }>();
-    tier.basket.items.forEach((item) => {
-      if (item.prod.category !== "op" || item.qty <= 0) return;
-      const entry = grouped.get(item.prod.id);
-      if (entry) entry.qty += item.qty;
-      else grouped.set(item.prod.id, { prod: item.prod, qty: item.qty });
-    });
-    return [...grouped.values()].sort((a, b) => b.prod.price - a.prod.price);
-  })();
+  const opPacks = groupOpPacks(tier.basket.items);
 
   const months = view.cal.days > 0 ? Math.max(1, Math.ceil(view.cal.days / 30)) : 1;
-  let extraSpend = 0;
-  let extraPulls = 0;
-  let qty = 0;
-  Object.keys(state.levi).forEach((id) => {
-    const n = state.levi[id as keyof typeof state.levi] || 0;
-    if (n <= 0) return;
-    const prod = PRODUCTS.find((p) => p.id === id);
-    if (!prod) return;
-    qty += n;
-    extraSpend += n * prod.price;
-    extraPulls += n * productPulls(prod, state.opPct);
-  });
+  const extras = leviExtras(state.levi, PRODUCTS, state.opPct);
+  const extraSpend = extras.spend;
+  const extraPulls = extras.pulls;
+  const qty = extras.qty;
 
   return (
     <section
@@ -1190,12 +944,11 @@ function BreakdownPanel({
                       {meta}
                     </span>
                   </span>
-                  <span className="hidden h-1 overflow-hidden bg-line-soft min-[600px]:block">
-                    <span
-                      className="block h-full"
-                      style={{ width: w + "%", background: tier.tier.color }}
-                    />
-                  </span>
+                  <Meter
+                    value={w}
+                    color={tier.tier.color}
+                    className="hidden min-[600px]:block"
+                  />
                   <span className="text-right font-mono text-[13px] text-fg">
                     {fmt1(line.value)}
                   </span>

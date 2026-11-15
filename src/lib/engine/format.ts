@@ -17,6 +17,18 @@ export function pad2(n: number): string {
   return n < 10 ? "0" + n : String(n);
 }
 
+// Signed pull delta: "+3.1" / "−3.1" / "0" (true minus sign, not a hyphen).
+export function signed(n: number): string {
+  if (Math.abs(n) < 0.05) return "0";
+  return (n > 0 ? "+" : "−") + fmt1(Math.abs(n));
+}
+
+// Signed USD delta: "+$3.10" / "−$3.10" / "$0.00".
+export function signedUsd(n: number): string {
+  if (Math.abs(n) < 0.005) return "$0.00";
+  return (n > 0 ? "+" : "−") + "$" + Math.abs(n).toFixed(2);
+}
+
 export function isoToDMY(iso: string): string {
   const p = String(iso || "").split("-");
   return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : String(iso || "");
