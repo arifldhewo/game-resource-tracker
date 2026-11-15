@@ -13,6 +13,10 @@ const LINKS = [
   { href: "/settings", key: "nav.settings", label: "SETTINGS" },
 ] as const;
 
+function isActive(pathname: string, href: string) {
+  return pathname === href || pathname === href + "/";
+}
+
 function Brand() {
   return (
     <Link
@@ -62,6 +66,11 @@ export function Topbar() {
 
   const showLang = pathname.startsWith("/forecast") || pathname.startsWith("/settings");
 
+  const activeLink = LINKS.find((link) => isActive(pathname, link.href));
+  const menuLabel = activeLink
+    ? t(activeLink.key, activeLink.label)
+    : t("nav.menu", "MENU");
+
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -102,13 +111,17 @@ export function Topbar() {
           aria-expanded={open}
           aria-controls="navMenu"
           aria-haspopup="true"
+          aria-label={
+            activeLink ? `${menuLabel} — ${t("nav.menu", "MENU")}` : menuLabel
+          }
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "flex min-h-11 items-center gap-1.5 border border-line bg-surface-raised px-2.5 font-display text-[11.5px] tracking-widest text-fg min-[760px]:hidden",
-            open && "border-accent/50 text-accent",
+            "flex min-h-11 items-center gap-1.5 border border-line bg-surface-raised px-2.5 font-display text-[11.5px] tracking-widest min-[760px]:hidden",
+            activeLink || open ? "text-accent" : "text-fg",
+            open && "border-accent/50",
           )}
         >
-          <span>{t("nav.menu", "MENU")}</span>
+          <span>{menuLabel}</span>
           <svg
             viewBox="0 0 10 6"
             aria-hidden="true"
@@ -127,8 +140,7 @@ export function Topbar() {
           )}
         >
           {LINKS.map((link) => {
-            const active =
-              pathname === link.href || pathname === link.href + "/";
+            const active = isActive(pathname, link.href);
             return (
               <Link
                 key={link.href}
