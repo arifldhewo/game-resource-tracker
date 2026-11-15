@@ -21,6 +21,13 @@ direction.
   instead.
 - Validate changes with `npm run lint && npm test && npm run build`.
 
+## Issues
+
+`issues/README.md` indexes known tech debt and pending actions, one file per
+item. Read it before starting work that touches deploys, releases, the
+forecast wizard, i18n, or tests — the item may already describe the change
+you are about to make.
+
 ## Release
 
 The tag does everything: `v*` tag push → deploy job → release job, which opens
