@@ -8,6 +8,11 @@ spacing, variant, or responsive conventions — read
 project's Tailwind v4 tokens, canonical utilities, variants, responsive rules,
 and validation workflow.
 
+Before creating, moving, or splitting a component — or before deciding where a
+file belongs — read `SKILLS/component-architecture/SKILL.md` first. It is the
+single source for component placement, route colocation, and dependency
+direction.
+
 ## Project
 
 - Next.js static export; Tailwind CSS v4 is CSS-first in `src/app/globals.css`
