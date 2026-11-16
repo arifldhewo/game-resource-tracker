@@ -6,6 +6,12 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.4] - 2026-11-16
+
+### Changed
+
+- Give the CROSSOVER banner 2 free 10-pulls (20 pulls) instead of 1.
+
 ## [0.6.3] - 2026-11-14
 
 ### Changed
