@@ -6,6 +6,12 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.5] - 2026-11-16
+
+### Changed
+
+- Add a Ko-fi support button to the global footer.
+
 ## [0.6.4] - 2026-11-16
 
 ### Changed
