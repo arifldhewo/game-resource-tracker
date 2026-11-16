@@ -260,7 +260,7 @@
   "info.archetype.kicker": "FIELD · BANNER ARCHETYPE",
   "info.archetype.title": "BANNER ARCHETYPE",
   "info.archetype.analogy": "Banner type = rulebook: each type has its own spark, pity group, and free pulls.",
-  "info.archetype.body": "<p><b>LIMITED</b> — 70% rate-up, spark at 300 pulls, isolated pity, 1 free 10-pull + 14 daily free pulls.</p><p><b>EVENT</b> — 50% rate-up, rate-up guaranteed after 150 pulls, shared pity.</p><p><b>STANDARD</b> — 50% rate-up, no hard pity, shared pity.</p><p><b>CROSSOVER</b> — 100% rate-up, spark at 120 pulls, isolated pity, 1 free 10-pull.</p><p><b>KERNEL</b> — 50% rate-up, no hard pity, kernel shared pity.</p><p><b>Isolated</b> means the inherited pity counter is ignored and starts at 0.</p>",
+  "info.archetype.body": "<p><b>LIMITED</b> — 70% rate-up, spark at 300 pulls, isolated pity, 1 free 10-pull + 14 daily free pulls.</p><p><b>EVENT</b> — 50% rate-up, rate-up guaranteed after 150 pulls, shared pity.</p><p><b>STANDARD</b> — 50% rate-up, no hard pity, shared pity.</p><p><b>CROSSOVER</b> — 100% rate-up, spark at 120 pulls, isolated pity, 2 free 10-pulls.</p><p><b>KERNEL</b> — 50% rate-up, no hard pity, kernel shared pity.</p><p><b>Isolated</b> means the inherited pity counter is ignored and starts at 0.</p>",
   "info.archetype.example": "LIMITED → spark 300.\nCROSSOVER → spark 120.",
   "info.archetype.impact": "Pity, spark, free pulls, rate-up, and tier status.",
   "info.income.kicker": "SECTION · INCOME ASSUMPTIONS",

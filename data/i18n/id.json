@@ -260,7 +260,7 @@
   "info.archetype.kicker": "FIELD · BANNER ARCHETYPE",
   "info.archetype.title": "BANNER ARCHETYPE",
   "info.archetype.analogy": "Tipe banner = buku aturan: tiap tipe punya spark, grup pity, dan free pull sendiri.",
-  "info.archetype.body": "<p><b>LIMITED</b> — rate-up 70%, spark 300 pull, pity terisolasi, 1 free 10-pull + 14 daily free pull.</p><p><b>EVENT</b> — rate-up 50%, jaminan rate-up setelah 150 pull, pity shared.</p><p><b>STANDARD</b> — rate-up 50%, tanpa hard pity, pity shared.</p><p><b>CROSSOVER</b> — rate-up 100%, spark 120 pull, pity terisolasi, 1 free 10-pull.</p><p><b>KERNEL</b> — rate-up 50%, tanpa hard pity, pity shared kernel.</p><p><b>Isolated</b> berarti counter pity warisan diabaikan dan mulai dari 0.</p>",
+  "info.archetype.body": "<p><b>LIMITED</b> — rate-up 70%, spark 300 pull, pity terisolasi, 1 free 10-pull + 14 daily free pull.</p><p><b>EVENT</b> — rate-up 50%, jaminan rate-up setelah 150 pull, pity shared.</p><p><b>STANDARD</b> — rate-up 50%, tanpa hard pity, pity shared.</p><p><b>CROSSOVER</b> — rate-up 100%, spark 120 pull, pity terisolasi, 2 free 10-pull.</p><p><b>KERNEL</b> — rate-up 50%, tanpa hard pity, pity shared kernel.</p><p><b>Isolated</b> berarti counter pity warisan diabaikan dan mulai dari 0.</p>",
   "info.archetype.example": "LIMITED → spark 300.\nCROSSOVER → spark 120.",
   "info.archetype.impact": "Pity, spark, free pull, rate-up, dan status tier.",
   "info.income.kicker": "SECTION · INCOME ASSUMPTIONS",

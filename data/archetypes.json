@@ -35,9 +35,9 @@
     "isolated": true,
     "spark": 120,
     "guaranteeAt": null,
-    "freePulls": 10,
-    "freePullsLabel": "1 free 10-pull ticket",
-    "desc": "Spark at 120 · isolated pity · 100% rate-up · 1 free 10-pull"
+    "freePulls": 20,
+    "freePullsLabel": "2 free 10-pull tickets",
+    "desc": "Spark at 120 · isolated pity · 100% rate-up · 2 free 10-pulls"
   },
   "KERNEL": {
     "name": "KERNEL",

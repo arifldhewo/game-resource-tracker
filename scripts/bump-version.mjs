@@ -65,13 +65,21 @@ if (note) {
   if (changelog.includes("## [" + next + "]")) {
     console.log("changelog: " + next + " already present, skipping insert");
   } else {
-    const marker = "## [Unreleased]\n\n";
-    if (!changelog.includes(marker)) {
+    const marker = /## \[Unreleased\]\r?\n\r?\n/;
+    if (!marker.test(changelog)) {
       fail("CHANGELOG.md is missing the '## [Unreleased]' section");
     }
-    const entry =
-      "## [" + next + "] - " + date + "\n\n### Changed\n\n- " + note + "\n\n";
-    changelog = changelog.replace(marker, marker + entry);
+    const eol = changelog.includes("\r\n") ? "\r\n" : "\n";
+    const entry = [
+      "## [" + next + "] - " + date,
+      "",
+      "### Changed",
+      "",
+      "- " + note,
+      "",
+      "",
+    ].join(eol);
+    changelog = changelog.replace(marker, (match) => match + entry);
     fs.writeFileSync(changelogFile, changelog);
   }
 } else {
