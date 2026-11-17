@@ -42772,6 +42772,885 @@
       "width": 420,
       "height": 220,
       "content": "FORECAST v3 PROTOTYPE\n\nSource: archive/proto/forecast-v3.html\n\nServe it:\n  cd archive/proto && python3 -m http.server 4173\n\nThen reload browser node\n\"v3 · Spending classification prototype\".\n\nIf the node is blank, the local\nserver is down."
+    },
+    {
+      "type": "frame",
+      "id": "1dasn8",
+      "name": "Archive · HTML screens [REFERENCE · superseded]",
+      "x": 8100,
+      "y": -385,
+      "width": 1060,
+      "layout": "vertical",
+      "gap": 18,
+      "padding": 28,
+      "fill": "$--card",
+      "stroke": "$--border",
+      "strokeWidth": 1,
+      "cornerRadius": 3,
+      "children": [
+        {
+          "type": "frame",
+          "id": "T4N0Db",
+          "name": "Head",
+          "layout": "vertical",
+          "gap": 6,
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "text",
+              "id": "u2ILwe",
+              "name": "Eyebrow",
+              "content": "ARCHIVE · HTML SOURCES",
+              "fill": "$--accent",
+              "fontFamily": "$--font-label",
+              "fontSize": 9,
+              "letterSpacing": 1.6
+            },
+            {
+              "type": "text",
+              "id": "36kogx",
+              "name": "Title",
+              "content": "Seven HTML screens, indexed",
+              "fill": "$--foreground",
+              "fontFamily": "$--font-display",
+              "fontSize": 26,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "2I5YgI",
+              "name": "Sub",
+              "content": "Everything under archive/ that renders a page: the four-page legacy app plus three forecast prototypes. Each row says what the screen did and which file still holds it.",
+              "fill": "$--muted-foreground",
+              "fontFamily": "$--font-body",
+              "fontSize": 12,
+              "lineHeight": 1.6,
+              "textGrowth": "fixed-width",
+              "width": "fill_container"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "w0WHo9",
+          "name": "Screens",
+          "layout": "vertical",
+          "gap": 10,
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "frame",
+              "id": "2Q6Jn2",
+              "name": "Landing · /",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "k5ofFy",
+                  "name": "Index",
+                  "content": "01",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "xcP5OA",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qCRR1z",
+                      "name": "Title",
+                      "content": "Landing · /",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WKkq3H",
+                      "name": "Question it answered",
+                      "content": "Hero, tier matrix, pity engine, banner-aware input and character-upgrade teasers. Shipped as the site entry point.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NG4Sfs",
+                      "name": "Source",
+                      "content": "archive/legacy/src/index.html · 157 lines · 9.6 KB · canvas: —",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FauVSy",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "JX4NDp",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--accent"
+                    },
+                    {
+                      "type": "text",
+                      "id": "aOlKzh",
+                      "name": "Label",
+                      "content": "LEGACY · SUPERSEDED",
+                      "fill": "$--accent",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "30NWU2",
+              "name": "Roadmap · /roadmap",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "J9obgh",
+                  "name": "Index",
+                  "content": "02",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "eyVruW",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cjgiVp",
+                      "name": "Title",
+                      "content": "Roadmap · /roadmap",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jNS8K1",
+                      "name": "Question it answered",
+                      "content": "Four commitment cards for the calculator, banner input, upgrade calculator and centralized state.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pvpgyP",
+                      "name": "Source",
+                      "content": "archive/legacy/src/roadmap.html · 159 lines · 9.5 KB · canvas: —",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VUguB7",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "SPtz73",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--accent"
+                    },
+                    {
+                      "type": "text",
+                      "id": "D8uG2u",
+                      "name": "Label",
+                      "content": "LEGACY · SUPERSEDED",
+                      "fill": "$--accent",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vx5Htp",
+              "name": "Settings · /settings",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aXRgwd",
+                  "name": "Index",
+                  "content": "03",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "eQ7Dvd",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hGXDd8",
+                      "name": "Title",
+                      "content": "Settings · /settings",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wM9gvj",
+                      "name": "Question it answered",
+                      "content": "Pull value packs and the OP conversion preference. Single panel, no wizard.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QptdG0",
+                      "name": "Source",
+                      "content": "archive/legacy/src/settings.html · 198 lines · 11.5 KB · canvas: —",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GBA6yF",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "ujTW0G",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--accent"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YFoAp8",
+                      "name": "Label",
+                      "content": "LEGACY · SUPERSEDED",
+                      "fill": "$--accent",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "m9H3J9",
+              "name": "Forecast terminal · /forecast",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "42Umy4",
+                  "name": "Index",
+                  "content": "04",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "LGIadf",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "e8bthm",
+                      "name": "Title",
+                      "content": "Forecast terminal · /forecast",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fn7k4x",
+                      "name": "Question it answered",
+                      "content": "The shipped four-step wizard: target, resources, matrix, outlook. Breakdown panel ids bdTier / bdBody. This is the file the Next.js route replaces.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "7Ne1aI",
+                      "name": "Source",
+                      "content": "archive/legacy/src/forecast.html · 2407 lines · 128.7 KB · canvas: —",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "CbkZC8",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "YirHht",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--accent"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mH900k",
+                      "name": "Label",
+                      "content": "LEGACY · SUPERSEDED",
+                      "fill": "$--accent",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "mDlQkT",
+              "name": "Forecast v3 prototype",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "yzHqdN",
+                  "name": "Index",
+                  "content": "05",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "4xIl7A",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Y4ajOE",
+                      "name": "Title",
+                      "content": "Forecast v3 prototype",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "5Ghshd",
+                      "name": "Question it answered",
+                      "content": "Adds the auth gate (nine auth.* strings), account slot, deploy button and neural status. Direct precursor of the shipped wizard.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xrwlQX",
+                      "name": "Source",
+                      "content": "archive/proto/forecast-v3.html · 2160 lines · 119.3 KB · canvas: v3 · Spending classification prototype",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "t88KTH",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "r5WKvq",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--muted-foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zhJ22W",
+                      "name": "Label",
+                      "content": "PROTOTYPE · SUPERSEDED",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pwNW1C",
+              "name": "Forecast v3 · PAHE build",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "NlSgs7",
+                  "name": "Index",
+                  "content": "06",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "GcsL3T",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kVT5HX",
+                      "name": "Title",
+                      "content": "Forecast v3 · PAHE build",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wl8LpE",
+                      "name": "Question it answered",
+                      "content": "Same prototype with the auth gate removed; footer reads PRTS FORECAST · PAHE BUILD. No browser node on this canvas.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zzywlZ",
+                      "name": "Source",
+                      "content": "archive/proto/forecast-v3-pahe.html · 2105 lines · 115.3 KB · canvas: —",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "6adMeV",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "TaPflf",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--muted-foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NIyFiP",
+                      "name": "Label",
+                      "content": "PROTOTYPE · SUPERSEDED",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j3S6Dq",
+              "name": "Roadmap prototype",
+              "layout": "horizontal",
+              "alignItems": "center",
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "width": "fill_container",
+              "fill": "$--background",
+              "stroke": "$--border",
+              "strokeWidth": 1,
+              "cornerRadius": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "7gp1w5",
+                  "name": "Index",
+                  "content": "07",
+                  "fill": "$--muted-foreground",
+                  "fontFamily": "$--font-numeric",
+                  "fontSize": 10,
+                  "letterSpacing": 0.6
+                },
+                {
+                  "type": "frame",
+                  "id": "Ncen6o",
+                  "name": "Body",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "width": "fill_container",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QWpWq0",
+                      "name": "Title",
+                      "content": "Roadmap prototype",
+                      "fill": "$--foreground",
+                      "fontFamily": "$--font-display",
+                      "fontSize": 15,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PIUJaT",
+                      "name": "Question it answered",
+                      "content": "Earlier roadmap pass with headings identical to the legacy page. No browser node on this canvas.",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-body",
+                      "fontSize": 11.5,
+                      "lineHeight": 1.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mU87sj",
+                      "name": "Source",
+                      "content": "archive/proto/roadmap.html · 136 lines · 8.1 KB · canvas: —",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-numeric",
+                      "fontSize": 9.5,
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RnkOKx",
+                  "name": "Status",
+                  "layout": "horizontal",
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "cornerRadius": 2,
+                  "stroke": "$--border",
+                  "strokeWidth": 1,
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "gIZTyx",
+                      "name": "Dot",
+                      "width": 5,
+                      "height": 5,
+                      "fill": "$--muted-foreground"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZNLeUC",
+                      "name": "Label",
+                      "content": "PROTOTYPE · SUPERSEDED",
+                      "fill": "$--muted-foreground",
+                      "fontFamily": "$--font-label",
+                      "fontSize": 9.5,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "aeYuTZ",
+          "name": "Why these are not redrawn",
+          "layout": "vertical",
+          "gap": 8,
+          "width": "fill_container",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "ga3N0e",
+              "name": "Divider",
+              "width": "fill_container",
+              "height": 1,
+              "fill": "$--border"
+            },
+            {
+              "type": "text",
+              "id": "7le0n3",
+              "name": "Caveat",
+              "content": "Pencil has no HTML importer. Transcribing roughly 4,800 lines of markup by hand would bury this document, so each source is recorded here with its provenance instead of being redrawn. The files themselves remain in git.",
+              "fill": "$--muted-foreground",
+              "fontFamily": "$--font-body",
+              "fontSize": 11,
+              "lineHeight": 1.55,
+              "textGrowth": "fixed-width",
+              "width": "fill_container"
+            },
+            {
+              "type": "text",
+              "id": "hHmaIS",
+              "name": "Duplicate pair",
+              "content": "archive/legacy/docs/* is byte-identical to archive/legacy/src/* (verified with cmp). It was the deploy copy, not a separate screen, so only src/ is listed above.",
+              "fill": "$--muted-foreground",
+              "fontFamily": "$--font-body",
+              "fontSize": 11,
+              "lineHeight": 1.55,
+              "textGrowth": "fixed-width",
+              "width": "fill_container"
+            },
+            {
+              "type": "text",
+              "id": "HJYC6q",
+              "name": "Dangling canvas refs",
+              "content": "Two browser nodes point at files that no longer exist: “v4 · Blueprint prototype” → 127.0.0.1:4173/forecast.html and “Type specimen” → 127.0.0.1:4173/fonts.html. Neither file is in archive/proto. The v4 blueprint source is missing from the archive.",
+              "fill": "$--destructive",
+              "fontFamily": "$--font-body",
+              "fontSize": 11,
+              "lineHeight": 1.55,
+              "textGrowth": "fixed-width",
+              "width": "fill_container"
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
