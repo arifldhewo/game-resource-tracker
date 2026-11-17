@@ -42747,7 +42747,7 @@
       "name": "Prototype · how to run",
       "width": 420,
       "height": 200,
-      "content": "BLUEPRINT v4.0 PROTOTYPE\n\nSource: archive/proto/forecast.html\nServe it:\n  cd archive/proto && python3 -m http.server 4173\nThen reload browser node \"v4 · Blueprint prototype\".\n\nIf the node is blank, the local server is down."
+      "content": "BLUEPRINT v4.0 PROTOTYPE\n\nSource: archive/proto/forecast.html — never present in the archive, and not recoverable from git history either. The archive/ tree has been removed.\n\nThe browser node below stays blank until it is re-pointed at a live build, or deleted."
     },
     {
       "type": "browser",
@@ -42771,7 +42771,7 @@
       "name": "Prototype v3 · how to run",
       "width": 420,
       "height": 220,
-      "content": "FORECAST v3 PROTOTYPE\n\nSource: archive/proto/forecast-v3.html\n\nServe it:\n  cd archive/proto && python3 -m http.server 4173\n\nThen reload browser node\n\"v3 · Spending classification prototype\".\n\nIf the node is blank, the local\nserver is down."
+      "content": "FORECAST v3 PROTOTYPE\n\nSource: archive/proto/forecast-v3.html — deleted with the archive/, still in git history. Recover it with:\n  git show <sha>^:archive/proto/forecast-v3.html > /tmp/proto/forecast-v3.html\nServe that directory on port 4173, then reload the browser node.\n\nThe node stays blank until then."
     },
     {
       "type": "frame",
@@ -43616,7 +43616,7 @@
               "type": "text",
               "id": "7le0n3",
               "name": "Caveat",
-              "content": "Pencil has no HTML importer. Transcribing roughly 4,800 lines of markup by hand would bury this document, so each source was recorded here with its provenance instead of being redrawn, and then deleted from the archive. This index is now the only map. Recover a file with: git log --diff-filter=D -- <path>, then git show <sha>^:<path>.",
+              "content": "Pencil has no HTML importer. Transcribing roughly 4,800 lines of markup by hand would bury this document, so each source was recorded here with its provenance instead of being redrawn. The HTML, and then the whole archive/ tree, were deleted; every path below is historical. This index is the only map left in the repo. Recover a file with: git log --diff-filter=D -- <path>, then git show <sha>^:<path>.",
               "fill": "$--muted-foreground",
               "fontFamily": "$--font-body",
               "fontSize": 11,

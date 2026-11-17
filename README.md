@@ -18,7 +18,7 @@ database.
 ```text
 src/
   app/            # routes: /, /forecast, /roadmap, /settings
-  components/     # layout, UI primitives, forecast wizard
+  components/     # layout and UI primitives
   lib/engine/     # pure TS: pity DP, basket optimizer, calendar, certs
   lib/store/      # forecast, settings, and language stores
   types/          # domain types
@@ -26,10 +26,7 @@ data/             # hardcoded JSON: products, archetypes, tiers, i18n
 public/           # CNAME, robots.txt, sitemap.xml, assets
 tests/engine/     # Vitest parity checks
 scripts/          # version bump/check helpers
-archive/          # archived docs, prototypes, and legacy site
-  documents/      # design/implementation documents
-  legacy/         # previous static site (reference until cutover)
-  proto/          # original design prototypes
+design/           # Pencil canvas: screens, handoff notes, archived HTML index
 ```
 
 ## Scripts
