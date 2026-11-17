@@ -28,9 +28,31 @@ item. Read it before starting work that touches deploys, releases, the
 forecast wizard, i18n, or tests — the item may already describe the change
 you are about to make.
 
+## Workflow
+
+- Pull the latest `master` before starting any change:
+  `git pull origin master`. Never start from a stale local `master`.
+- Never work from a tag or a detached HEAD. Base commits on up-to-date
+  `master`; a tag is only a pointer, not a place to commit.
+- Never force-push `master` or tags. If a push is rejected, fetch and reconcile
+  first.
+
 ## Release
 
 The tag does everything: `v*` tag push → deploy job → release job, which opens
 the GitHub Release with the `CHANGELOG.md` section as body. Never create a
-release by hand. Ships are: `npm run bump -- patch --note "..."`, commit, push
-`master`, then `git tag -a vX.Y.Z` and push the tag.
+release by hand.
+
+Ship from `master`, never directly from an older tag or release lineage:
+
+```bash
+git pull origin master
+npm run bump -- patch --note "..."
+git add -A && git commit -m "chore(release): vX.Y.Z"
+git push origin master
+git tag -a vX.Y.Z -m "vX.Y.Z"
+git push origin vX.Y.Z
+```
+
+The tag must point at the commit just pushed to `master`. Verify with
+`git merge-base --is-ancestor origin/master vX.Y.Z^{}` before pushing the tag.
