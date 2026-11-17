@@ -6,6 +6,12 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.6] - 2026-11-17
+
+### Changed
+
+- Point the Ko-fi footer button to ko-fi.com/a_word.
+
 ## [0.6.5] - 2026-11-16
 
 ### Changed
