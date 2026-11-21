@@ -26,7 +26,7 @@ export function InfoSheet({ infoKey, onClose }: InfoSheetProps) {
           aria-describedby={undefined}
           className={cn(
             "fixed z-41 flex max-h-[calc(100vh-48px)] w-115 max-w-[calc(100%-32px)] -translate-x-1/2 flex-col border border-line bg-card shadow-sheet outline-none",
-            "left-1/2 top-6",
+            "left-1/2 top-6 lg:max-h-[calc(100%-48px)]",
             "max-[760px]:left-0 max-[760px]:top-auto max-[760px]:bottom-0 max-[760px]:w-full max-[760px]:max-w-none max-[760px]:max-h-[70dvh] max-[760px]:translate-x-0 max-[760px]:rounded-t-[14px] max-[760px]:pb-[env(safe-area-inset-bottom)]",
           )}
         >

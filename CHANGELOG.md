@@ -6,6 +6,12 @@ pushes.
 
 ## [Unreleased]
 
+## [0.6.7] - 2026-11-21
+
+### Changed
+
+- Keep the desktop info modal inside the viewport.
+
 ## [0.6.6] - 2026-11-17
 
 ### Changed
